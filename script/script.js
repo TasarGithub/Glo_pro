@@ -1,10 +1,17 @@
-let money = 40000; // Доход за месяц
-let income = "40000"; //Доп доход, фриланс
-let addExpenses = "Кредит,Ремонт,Обучение"; // Доп расходы 
-let deposit = true; // Наличие депозита
-let mission = 1500000; // Какую сумму хочу накопить
-let period = 12; //Период
+let money = 40000; // Р”РѕС…РѕРґ Р·Р° РјРµСЃСЏС†
+let income = "40000"; //Р”РѕРї РґРѕС…РѕРґ, С„СЂРёР»Р°РЅСЃ
+let addExpenses = "РљСЂРµРґРёС‚,Р РµРјРѕРЅС‚,РћР±СѓС‡РµРЅРёРµ"; // Р”РѕРї СЂР°СЃС…РѕРґС‹ 
+let deposit = true; // РќР°Р»РёС‡РёРµ РґРµРїРѕР·РёС‚Р°
+let mission = 1500000; // РљР°РєСѓСЋ СЃСѓРјРјСѓ С…РѕС‡Сѓ РЅР°РєРѕРїРёС‚СЊ
+let period = 12; //РџРµСЂРёРѕРґ
 
 console.log( typeof(money) );
 console.log( typeof(income) );
+console.log( typeof(deposit) );
+// РјРµС‚РѕРґС‹ 
+console.log( "РџРµСЂРёРѕРґ " + period + " РјРµСЃСЏС†РµРІ " + "Р¦РµР»СЊ Р·Р°СЂР°Р±РѕС‚Р°С‚СЊ "+ mission +" СЂСѓР±Р»РµР№" );
+console.log( typeof(deposit) );
+console.log( typeof(deposit) );
+console.log( typeof(deposit) );
+console.log( typeof(deposit) );
 console.log( typeof(deposit) );
