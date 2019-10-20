@@ -12,11 +12,9 @@ console.log( "income.length" );
 console.log( income.length );
 console.log( "typeof(deposit)");
 console.log( typeof(deposit) );
-// методы 
 console.log( "Период " + period + " месяцев. " + 
 "Цель заработать "+ mission +" рублей" );
 addExpenses = addExpenses.toLowerCase();
-
 console.log("budgetDay");
 console.log( budgetDay);
 console.log( "money % 30" );
