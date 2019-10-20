@@ -1,7 +1,9 @@
 let num="266219";
 let amount;
+
 //Массив цифр числа 266219
 symbolArray=num.split("");
+
 //Упрощенный неуниверсальный способ.
 // console.log( symbolArray );
 // amount=symbolArray[0]*symbolArray[1]*
@@ -9,10 +11,8 @@ symbolArray=num.split("");
 // symbolArray[4]*symbolArray[5];
 // console.log( amount );
 // DataView,cx/v,xc./v, /zcxV<>/c.xv,c./v,xcbmvm
+
 //Универсальный способ подсчета произведения чисел
-
-
-
 let lenghtNum = num.length;
 let i=0;
 amount =1;
@@ -23,7 +23,6 @@ for (; i<=lenghtNum-1; i++ ) {
     // console.log( i );
     console.log( amount );
 }
-
 // возведение в степень
 amount=amount**3;
 console.log( amount );
