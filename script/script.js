@@ -13,6 +13,6 @@ console.log( "typeof(deposit): "+ typeof(deposit));
 console.log( "Период " + period + " месяцев. " + 
 "Цель заработать "+ mission +" рублей" );
 addExpenses = addExpenses.toLowerCase();
-console.log("addExpenses as array: " + addExpenses.split("") );
+console.log("addExpenses as array: " + addExpenses.split(",") );
 console.log( "budgetDay: " + budgetDay);
 console.log( "money % 30: " + money % 30 );
