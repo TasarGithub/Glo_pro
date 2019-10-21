@@ -3,10 +3,11 @@
 let money = 40000; // Доход за месяц
 const income = '40000'; //Доп доход, фриланс
 let   addExpenses = 'Кредит,Ремонт,Обучение'; // Доп расходы 
-const deposit = true; // Наличие депозита
+let deposit = true; // Наличие депозита
 const mission = 1500000; // Какую сумму хочу накопить
 const period = 12; //Период
 const budgetDay = money/30; //Дневной бюджет
+let mandatoryExpenses =1; // Оюязательные расходы
 
 // console.log('typeof(money): '+ typeof(money));
 // console.log('income.length: '+ income.length);
@@ -17,37 +18,22 @@ const budgetDay = money/30; //Дневной бюджет
 // console.log('budgetDay: ' + budgetDay);
 // console.log('money % 30: ' + money % 30);
 
-money = prompt ('Ваш месячный доход?');
-console.log('money: '+ money);
-
 
 // 1) Спрашиваем у пользователя “Ваш месячный доход?” и результат сохраняем в переменную money
-
-
-
-		
-
+money = prompt('Ваш месячный доход?');
+console.log('money: '+ money);
 // 2) Спросить у пользователя “Перечислите возможные расходы за рассчитываемый период через запятую” сохранить в переменную addExpenses, вывести в консоль в виде массива 
-
-		
-
-
-
+addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую');
+console.log('Возможные расходы за рассчитываемый период: ' + addExpenses.split(','));
 // 3) Спросить у пользователя “Есть ли у вас депозит в банке?” и сохранить данные в переменной deposit (булевое значение true/false)
-
-
-
-
-
+deposit = prompt('Есть ли у вас депозит в банке?');
 // 4) Вывести в консоль типы данных money, income, deposit
-
-
-
-
-
+console.log('typeof(money): '+ typeof(money));
+console.log('typeof(income): '+ typeof(income));
+console.log('typeof(deposit): '+ typeof(deposit));
 // 5) Спросить у пользователя по 2 раза каждый вопрос и записать ответы в переменные  
-
 // “Какие обязательные ежемесячные расходы у вас есть?” 
+
 
 // “Во сколько это обойдется?”  
 
