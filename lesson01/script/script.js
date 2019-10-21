@@ -1,3 +1,4 @@
+// 1 Lesson
 let money;
 let income; 
 let addExpenses;
