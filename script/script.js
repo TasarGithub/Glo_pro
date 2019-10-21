@@ -1,11 +1,11 @@
 // 2 lesson
-let money = 40000; // Доход за месяц
-let income = "40000"; //Доп доход, фриланс
+const money = 40000; // Доход за месяц
+const income = "40000"; //Доп доход, фриланс
 let addExpenses = "Кредит,Ремонт,Обучение"; // Доп расходы 
-let deposit = true; // Наличие депозита
-let mission = 1500000; // Какую сумму хочу накопить
-let period = 12; //Период
-let budgetDay = money/30; //Дневной бюджет
+const deposit = true; // Наличие депозита
+const mission = 1500000; // Какую сумму хочу накопить
+const period = 12; //Период
+const budgetDay = money/30; //Дневной бюджет
 
 console.log( "typeof(money): "+ typeof(money) );
 console.log( "income.length: "+ income.length );
