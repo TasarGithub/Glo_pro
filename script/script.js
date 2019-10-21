@@ -7,7 +7,10 @@ let deposit = true; // Наличие депозита
 const mission = 1500000; // Какую сумму хочу накопить
 const period = 12; //Период
 const budgetDay = money/30; //Дневной бюджет
-let mandatoryExpenses =1; // Оюязательные расходы
+let mandatoryExpensesList1 =1; // Оюязательные расходы список вариант1
+let mandatoryExpensesList2 =1; // Оюязательные расходы список вариант2
+let mandatoryExpenses1 =1; // Оюязательные расходы вариант1
+let mandatoryExpenses2 =1; // Оюязательные расходы вариант2
 
 // console.log('typeof(money): '+ typeof(money));
 // console.log('income.length: '+ income.length);
@@ -33,6 +36,7 @@ console.log('typeof(income): '+ typeof(income));
 console.log('typeof(deposit): '+ typeof(deposit));
 // 5) Спросить у пользователя по 2 раза каждый вопрос и записать ответы в переменные  
 // “Какие обязательные ежемесячные расходы у вас есть?” 
+
 
 
 // “Во сколько это обойдется?”  
