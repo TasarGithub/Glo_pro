@@ -21,21 +21,21 @@ let budgetDay = money/30; //Дневной бюджет
 // while  (!(!isNaN(money) && isFinite(money))) 
 //3. Если приходит нечисло parseInt вернет NaN, который в money > 0 даст false в любом случае, поэтмоу решил оставиь  только проверку на  m > 0
 
-// money = parseInt(prompt('Ваш месячный доход?'));
-// while  (!(money > 0)) {
-//     alert("Введит числовое значение, больше нуля");
-//     money = parseInt(prompt('Ваш месячный доход?'));
-//     console.log('typeof(money): '+ typeof(money));
-// } 
-// console.log('typeof(money): '+ money);
-// console.log('money: '+ money);
+money = parseInt(prompt('Ваш месячный доход?'));
+while  (!(money > 0)) {
+    alert("Введит числовое значение, больше нуля");
+    money = parseInt(prompt('Ваш месячный доход?'));
+    console.log('typeof(money): '+ typeof(money));
+} 
+console.log('typeof(money): '+ money);
+console.log('money: '+ money);
 
 
-// // // 2) Спросить у пользователя “Перечислите возможные расходы за рассчитываемый период через запятую” сохранить в переменную addExpenses, вывести в консоль в виде массива 
-// addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую');
-// console.log('Возможные расходы за рассчитываемый период: ' + addExpenses.split(','));
+// // 2) Спросить у пользователя “Перечислите возможные расходы за рассчитываемый период через запятую” сохранить в переменную addExpenses, вывести в консоль в виде массива 
+addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую');
+console.log('Возможные расходы за рассчитываемый период: ' + addExpenses.split(','));
 
-// // 3) Спросить у пользователя “Есть ли у вас депозит в банке?” и сохранить данные в переменной deposit (булевое значение true/false)
+// 3) Спросить у пользователя “Есть ли у вас депозит в банке?” и сохранить данные в переменной deposit (булевое значение true/false)
 deposit = +prompt('Есть ли у вас депозит в банке? Да=1/Нет=0'); // Конверт в число для послед обработки ввода
 // ПРОВЕРКА кошерности ввода
 while  (!(deposit == 1)||(deposit == 0)) {
@@ -60,8 +60,8 @@ let mandatoryExpensesList1 = prompt('Перечислите обязательн
 let mandatoryExpenses1=  parseInt (prompt('Во сколько это обойдется? Вариант1'));
 
 //Проверка корректности ввода расходов
-while  (!(!isNaN(mandatoryExpenses1) && isFinite(mandatoryExpenses1))) {
-     alert("Введено нечисловое значение, повторите ввод");
+while  (!(mandatoryExpenses1 > 0)) {
+     alert("Введит числовое значение, больше нуля");
      mandatoryExpenses1 = parseInt(prompt('Обязательные ежемесячные расходы, сумма. Введите числом'));
      console.log('mandatoryExpenses1: ' + mandatoryExpenses1);
 } 
@@ -71,8 +71,8 @@ let mandatoryExpensesList2 = prompt('Перечислите обязательн
 let mandatoryExpenses2 = prompt('Во сколько это обойдется? Вариант2');
 
 //Проверка корректности ввода расходов
-while  (!(!isNaN(mandatoryExpenses2) && isFinite(mandatoryExpenses2))) {
-    alert("Введено нечисловое значение, повторите ввод");
+while  (!(mandatoryExpenses2>0)) {
+    alert("Введит числовое значение, больше нуля");
     mandatoryExpenses2 = parseInt(prompt('Обязательные ежемесячные расходы, сумма. Введите числом'));
     console.log('mandatoryExpenses1: ' + mandatoryExpenses2);
 } 
@@ -114,7 +114,7 @@ if (budgetDay > 800) {
     case 800:
             console.log('Еще чуть-чуть и будет высокий уровень дохода');
             break;
-    default: console.log('НЛО прилетело и карачун');
+    default: console.log('НЛО прилетело и Зима близко');
     }
 }
 
