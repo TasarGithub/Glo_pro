@@ -1,4 +1,4 @@
-// 2 lesson
+// lesson03
 'use strict';
 let money = 40000; // Доход за месяц
 const income = '40000'; //Доп доход, фриланс
