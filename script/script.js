@@ -1,4 +1,4 @@
-// 2 lesson
+// 4 lesson
 const money = 40000; // Доход за месяц
 const income = "40000"; //Доп доход, фриланс
 let addExpenses = "Кредит,Ремонт,Обучение"; // Доп расходы 
