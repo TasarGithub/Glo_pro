@@ -113,8 +113,19 @@ if (budgetDay > 800) {
 
 
 
-function outputMessage(){
-        console.log('Hello world');
+function getExpensesMonth(mandatoryExpenses1_par, mandatoryExpenses2_par){
+    console.log(mandatoryExpenses1_par + mandatoryExpenses2_par);
+    return mandatoryExpenses1_par + mandatoryExpenses2_par;
     }
 
-    outputMessage ();
+console.log('getExpensesMonth: ', getExpensesMonth(mandatoryExpenses1, mandatoryExpenses2));
+
+function getAccumulatedMonth (money_par,income_par,getExpensesMonth_par){
+    return  money_par + income_par - getExpensesMonth_par;
+}
+let accumulatedMonth = getAccumulatedMonth(money,income);
+
+function getTargetMonth (mission_par,accumulatedMonth_par){
+    return mission_par
+}
+
