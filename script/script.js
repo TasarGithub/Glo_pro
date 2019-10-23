@@ -47,7 +47,6 @@ while  (!(Expenses2 > 0)) {
     Expenses2 = parseInt(prompt('Обязательные ежемесячные расходы, сумма. Введите числом'));
 } 
 
-
 //  Вычислить доход за месяц, учитывая обязательные расходы, 
 let budgetMonth = (+money) + (+income) - Expenses1 - Expenses2;
 
