@@ -1,4 +1,5 @@
-// lesson03
+// Lesson 04
+
 'use strict';
 let money = 40000; // Доход за месяц
 const income = '40000'; //Доп доход, фриланс
@@ -8,106 +9,73 @@ const mission = 1500000; // Какую сумму хочу накопить
 const period = 12; //Период
 let budgetDay = money/30; //Дневной бюджет
 
-// 1) Спрашиваем у пользователя “Ваш месячный доход?” и результат сохраняем в переменную money
-
-//Несколько вариантов проверки на кооректность ввода исключил
-// 1. Promt возвращает строку - это не оптимально
-// money = prompt('Ваш месячный доход?'));
-// while  (!(!isNaN(money) && isFinite(money))) 
-//2. Фильтруются варианты ввода букв и бесконечных величин , но не учитываются варианты отрицательных чисел
-// money = parseInt(prompt('Ваш месячный доход?'));
-// while  (!(!isNaN(money) && isFinite(money))) 
-//3. Если приходит нечисло, parseInt всегда вернет NaN, который в money > 0 даст false в любом случае, 
-// поэтмоу решил оставиь только проверку на  money > 0
-
+// (money <=0) не учитывает вариант NaN, поэтому вернул назад, после комментария Максима
 money = parseInt(prompt('Ваш месячный доход?'));
-
-console.log('(money <= 0): ', (money <= 0));
 while  (!(money > 0)) {
    alert("Введите числовое значение, больше нуля");
    money = parseInt(prompt('Ваш месячный доход?'));
-   console.log('typeof(money): '+ typeof(money));
 } 
 
-console.log('typeof(money): '+ money);
-console.log('money: '+ money);
-
-// 2) Спросить у пользователя “Перечислите возможные расходы за рассчитываемый период через запятую” сохранить в переменную addExpenses, вывести в консоль в виде массива 
 addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую');
-console.log('Возможные расходы за рассчитываемый период: ' + addExpenses.split(','));
 
-// 3) Спросить у пользователя “Есть ли у вас депозит в банке?” и сохранить данные в переменной deposit (булевое значение true/false)
 deposit = confirm ('Есть ли у вас депозит в банке?');
-// 4) Вывести в консоль типы данных money, income, deposit
-console.log('typeof(money): '+ typeof(money));
-console.log('typeof(income): '+ typeof(income));
-console.log('typeof(deposit): '+ typeof(deposit));
 
-// 5) Спросить у пользователя по 2 раза каждый вопрос и записать ответы в переменные  
-// “Какие обязательные ежемесячные расходы у вас есть?” 
-// “Во сколько это обойдется?”  1
-// в итоге 4 вопроса и 4 переменных
-
-let mandatoryExpensesList1 = prompt('Обязательный ежемесячный расход. Вариант1');
-let mandatoryExpenses1=  parseInt (prompt('Во сколько это обойдется? Вариант1'));
-
-//Проверка корректности ввода расходов
-while  (!(mandatoryExpenses1 > 0)) {
-    alert("Введит числовое значение, больше нуля");
-    mandatoryExpenses1 = parseInt(prompt('Обязательные ежемесячные расходы, сумма. Введите числом'));
-    console.log('mandatoryExpenses1: ' + mandatoryExpenses1);
-} 
-
-console.log('mandatoryExpenses1: ' + mandatoryExpenses1);
-
-let mandatoryExpensesList2 = prompt('Обязательный ежемесячный расход. Вариант2');
-let mandatoryExpenses2 = prompt('Во сколько это обойдется? Вариант2');
-
-//Проверка корректности ввода расходов
-while  (!(mandatoryExpenses2 > 0)) {
-    alert("Введит числовое значение, больше нуля");
-    mandatoryExpenses2 = parseInt(prompt('Обязательные ежемесячные расходы, сумма. Введите числом'));
-    console.log('mandatoryExpenses1: ' + mandatoryExpenses2);
-} 
-
-console.log('mandatoryExpenses2: ' + mandatoryExpenses2);
-
-// 6) Вычислить доход за месяц, учитывая обязательные расходы, сохранить в переменную budgetMonth и вывести результат в консоль
-let budgetMonth = (+money) + (+income) - mandatoryExpenses1 - mandatoryExpenses2;
-console.log('budgetMonth: ' + budgetMonth);
-// 7) Зная budgetMonth, посчитать за сколько месяцев будет достигнута цель mission, вывести в консоль, округляя в большую сторону
-console.log('За сколько месяцев будет достигнута цель ' + mission + ', округлённая в большую сторону ' + Math.ceil(mission / budgetMonth));
-// 8) Поправить budgetDay учитывая бюджет на месяц, а не месячный доход. Вывести в консоль  округлив в меньшую сторону (методы объекта Math в помощь)
-budgetDay = Math.floor(budgetMonth / 30);
-console.log('budgetDay, учитывающий бюджет на месяц, а не месячный доход: ' + budgetDay);
-
-// 9) Написать конструкцию условий		
-// Если budgetDay больше 800, то “Высокий уровень дохода”
-// Если budgetDay больше 300 и меньше 800, то сообщение “Средний уровень дохода”
-// Если budgetDay больше 0 и меньше 300 то в консоль вывести сообщение “Низкий уровень дохода”
-// Если отрицательное значение то вывести “Что то пошло не так”
-// учесть варианты 0, 300 и 800
-if (budgetDay > 800) {
-    console.log('Высокий уровень дохода');
-} else if (budgetDay > 300 && budgetDay < 800) {
-    console.log('Средний уровень дохода');
-} else if (budgetDay > 0 && budgetDay < 300) {
-    console.log('Низкий уровень дохода');
-} else if (budgetDay < 0) {
-    console.log('Что то пошло не так');
-} else {
-    switch (budgetDay) {
-    case 0:
-            console.log('Нет дохода');
-            break;
-    case 300:
-            console.log('Еще чуть-чуть и будет средний уровень дохода');
-            break;
-    case 800:
-            console.log('Еще чуть-чуть и будет высокий уровень дохода');
-            break;
-    default: console.log('НЛО прилетело и Зима близко');
-    }
+let showTypeof = function(data){
+    console.log(data, typeof(data));
 }
-// 10) Проверить, чтобы все работало без ошибок в консоли
-// 11) Добавить папку с третьим уроком в свой репозиторий на GitHub
+
+showTypeof (money);
+showTypeof (income);
+showTypeof (deposit);
+
+let ExpensesList1 = prompt('Обязательный ежемесячный расход. Вариант1');
+let Expenses1=  +prompt('Во сколько это обойдется? Вариант1');
+
+//Проверка корректности ввода расходов
+while  (!(Expenses1 > 0)) {
+    alert("Введит числовое значение, больше нуля");
+    Expenses1 = parseInt(prompt('Обязательные ежемесячные расходы, сумма. Введите числом'));
+} 
+
+
+let ExpensesList2 = prompt('Обязательный ежемесячный расход. Вариант2');
+let Expenses2 = +prompt('Во сколько это обойдется? Вариант2');
+
+//Проверка корректности ввода расходов
+while  (!(Expenses2 > 0)) {
+    alert("Введит числовое значение, больше нуля");
+    Expenses2 = parseInt(prompt('Обязательные ежемесячные расходы, сумма. Введите числом'));
+} 
+
+//  Вычислить доход за месяц, учитывая обязательные расходы, 
+let budgetMonth = (+money) + (+income) - Expenses1 - Expenses2;
+
+// Поправить budgetDay учитывая бюджет на месяц, а не месячный доход. 
+budgetDay = Math.floor(budgetMonth / 30);
+
+let getStatusIncome = function(){
+    if (budgetDay <= 300) {
+        return ('Низкий уровень дохода');
+    } else if (budgetDay <= 800) {
+        return ('Средний уровень дохода');
+    } else {
+        return ('Высокий уровень дохода');
+    } 
+}
+console.log(getStatusIncome());
+
+function getExpensesMonth(exp1,exp2){
+    return +exp1 + (+exp2);
+    }
+
+function getAccumulatedMonth(money_par,income_par,getExpensesMonth_par){
+    return  +money_par + (+income_par) - getExpensesMonth_par;
+}
+
+let accumulatedMonth = getAccumulatedMonth(money,income,getExpensesMonth(Expenses1, Expenses2));
+console.log('Накопления за период: ', accumulatedMonth);
+
+function getTargetMonth(mission_par,accumulatedMonth_par){
+    return Math.floor(mission_par/accumulatedMonth_par);
+}
+console.log('Cрок достижения цели в месяцах', getTargetMonth (mission,accumulatedMonth));
