@@ -39,10 +39,15 @@ console.log('Возможные расходы за рассчитываемый
 
 // 3) Спросить у пользователя “Есть ли у вас депозит в банке?” и сохранить данные в переменной deposit (булевое значение true/false)
 deposit = confirm ('Есть ли у вас депозит в банке?');
+
 // 4) Вывести в консоль типы данных money, income, deposit
-console.log('typeof(money): '+ typeof(money));
-console.log('typeof(income): '+ typeof(income));
-console.log('typeof(deposit): '+ typeof(deposit));
+let showTypeof = function(data){
+    console.log(data, typeof(getStatusIncome));
+}
+
+showTypeof (money);
+showTypeof (icome);
+showTypeof (deposit);
 
 // 5) Спросить у пользователя по 2 раза каждый вопрос и записать ответы в переменные  
 // “Какие обязательные ежемесячные расходы у вас есть?” 
@@ -88,44 +93,32 @@ console.log('budgetDay, учитывающий бюджет на месяц, а 
 // Если budgetDay больше 0 и меньше 300 то в консоль вывести сообщение “Низкий уровень дохода”
 // Если отрицательное значение то вывести “Что то пошло не так”
 // учесть варианты 0, 300 и 800
-if (budgetDay > 800) {
-    console.log('Высокий уровень дохода');
-} else if (budgetDay > 300 && budgetDay < 800) {
-    console.log('Средний уровень дохода');
-} else if (budgetDay > 0 && budgetDay < 300) {
-    console.log('Низкий уровень дохода');
-} else if (budgetDay < 0) {
-    console.log('Что то пошло не так');
-} else {
-    switch (budgetDay) {
-    case 0:
-            console.log('Нет дохода');
-            break;
-    case 300:
-            console.log('Еще чуть-чуть и будет средний уровень дохода');
-            break;
-    case 800:
-            console.log('Еще чуть-чуть и будет высокий уровень дохода');
-            break;
-    default: console.log('НЛО прилетело и Зима близко');
-    }
+let getStatusIncome = function (){
+    if (budgetDay <= 300) {
+        return ('Низкий уровень дохода');
+    } else if (budgetDay <= 800) {
+        return ('Средний уровень дохода');
+    } else {
+        return ('Высокий уровень дохода');
+    } 
 }
 
+console.log(getStatusIncome());
 
 
 function getExpensesMonth(mandatoryExpenses1_par, mandatoryExpenses2_par){
-    console.log(mandatoryExpenses1_par + mandatoryExpenses2_par);
     return mandatoryExpenses1_par + mandatoryExpenses2_par;
     }
-
 console.log('getExpensesMonth: ', getExpensesMonth(mandatoryExpenses1, mandatoryExpenses2));
 
 function getAccumulatedMonth (money_par,income_par,getExpensesMonth_par){
     return  money_par + income_par - getExpensesMonth_par;
 }
 let accumulatedMonth = getAccumulatedMonth(money,income);
+console.log('accumulatedMonth: ', accumulatedMonth);
 
 function getTargetMonth (mission_par,accumulatedMonth_par){
-    return mission_par
+    return Math.floor(mission_par/accumulatedMonth_par);
 }
+console.log('getTargetMonth (mission_par,accumulatedMonth_par): ', getTargetMonth (mission,accumulatedMonth));
 
