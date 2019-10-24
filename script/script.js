@@ -18,14 +18,15 @@ start()
 let addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую'),
     deposit = confirm ('Есть ли у вас депозит в банке?'),
     budgetDay = money/30; //Дневной бюджет
+// в 5 уроке showTypeof не требуется для вывода, поэтому комментирую
+//     let showTypeof = function(data){
+//     console.log(data, typeof(data));
+// }
 
-    let showTypeof = function(data){
-    console.log(data, typeof(data));
-}
-
-showTypeof (money);
-showTypeof (income);
-showTypeof (deposit);
+// // в 5 уроке это не требуется для вывода, поэтому комментирую
+// showTypeof (money);
+// showTypeof (income);
+// showTypeof (deposit);
 
 
 let Expenses1,
@@ -41,12 +42,6 @@ let getExpensesMonth = function(){
                 
         if (i == 0) Expenses1 = prompt('Введите обязательную статью расходов.', 'Транспорт');
         if (i == 1) Expenses2 = prompt('Введите обязательную статью расходов.', 'Кредит');
-
-        // ExpensesAmount = +prompt('Во сколько это обойдется? ', 7000);
-        // //Проверка корректности ввода расхода
-        // while  (!(ExpensesAmount > 0)) {
-        //     ExpensesAmount = +prompt('Во сколько это обойдется? ', 7000);
-        // }
         
         //Проверка корректности ввода расхода
         do {
