@@ -11,7 +11,6 @@ const isNum = function(n){
 }
 
 let money = prompt('Ваш месячный доход?', 80000);
-console.log((isNum(money)));
 while (!isNum(money)){
    money = prompt('Ваш месячный доход?', 80000);
 } 
@@ -19,10 +18,9 @@ let addExpenses = prompt('Перечислите возможные расход
     deposit = confirm ('Есть ли у вас депозит в банке?'),
     budgetDay = money / 30; //Дневной бюджет
 
-    let showTypeof = function(data){
+let showTypeof = function(data){
     console.log(data, typeof(data));
 }
-
 showTypeof (money);
 showTypeof (income);
 showTypeof (deposit);
@@ -31,7 +29,7 @@ let expenses1 = prompt('Обязательный ежемесячный расх
     expensesAmount1 = prompt('Во сколько это обойдется? Вариант1', 5000);
 
 //Проверка корректности ввода расходов
-while  (!isNum(expensesAmount1)) {
+while (!isNum(expensesAmount1)) {
     expensesAmount1 = prompt('Во сколько это обойдется? Вариант1', 5000);
 } 
 
@@ -39,7 +37,7 @@ let expenses2 = prompt('Обязательный ежемесячный расх
     expensesAmount2 = prompt('Во сколько это обойдется? Вариант2', 7000);
 
 //Проверка корректности ввода расходов
-while  (!isNum(expensesAmount2)) {
+while (!isNum(expensesAmount2)) {
     expensesAmount2 = prompt('Во сколько это обойдется? Вариант2', 7000);
 } 
 
@@ -54,8 +52,6 @@ function getAccumulatedMonth(money_par,getExpensesMonth_par){
 let accumulatedMonth = getAccumulatedMonth(money,getExpensesMonth(expensesAmount1, expensesAmount2));
 console.log('Накопления за период: ', accumulatedMonth);
 
-//let budgetMonth = money - expensesAmount1 - expensesAmount2; 
-//accumulatedMonth заменил budgetMonth
 
 // Поправить budgetDay учитывая бюджет на месяц, а не месячный доход. 
 budgetDay = Math.floor(accumulatedMonth / 30);
