@@ -58,33 +58,36 @@ let getExpensesMonth = function(){
     return sum;
 }
 
-// // Так как в скрипте дважды используется вычисляемое getExpensesMonth зачение 
-// let ExpensesMonth = getExpensesMonth (); 
-
-// //  Вычислить доход за месяц, учитывая обязательные расходы, 
-// let budgetMonth = (+money) + (+income) - ExpensesMonth;
-// console.log('budgetMonth = (+money) + (+income) - ExpensesMonth;: ', budgetMonth);
-
-// // Поправить budgetDay учитывая бюджет на месяц, а не месячный доход. 
-// budgetDay = Math.floor(budgetMonth / 30);
-
-let getStatusIncome = function(){
-    if (budgetDay <= 300) {
-        return ('Низкий уровень дохода');
-    } else if (budgetDay <= 800) {
-        return ('Средний уровень дохода');
-    } else {
-        return ('Высокий уровень дохода');
-    } 
-}
-console.log(getStatusIncome());
 
 function getAccumulatedMonth(money_par,income_par,getExpensesMonth_par){
     return  +money_par + (+income_par) - getExpensesMonth_par;
 }
 
-let accumulatedMonth = getAccumulatedMonth(money,income,getExpensesMonth());
+let accumulatedMonth = getAccumulatedMonth(money,income,getExpensesMonth ());
 console.log('Накопления за период: ', accumulatedMonth);
+
+// budgetMonth = accumulatedMonth, поэтому заккоментировал.
+
+// let budgetMonth = (+money) + (+income) - ExpensesMonth;
+// console.log('budgetMonth = (+money) + (+income) - ExpensesMonth;: ', budgetMonth);
+
+// Поправить budgetDay учитывая бюджет на месяц, а не месячный доход. 
+budgetDay = Math.floor(accumulatedMonth / 30);
+
+let getStatusIncome = function(){
+    if (budgetDay < 0){
+        return ('Что-то пошло не так');
+    } else if (budgetDay <= 300){
+        return ('Низкий уровень дохода');
+    } else if (budgetDay <= 800){
+        return ('Средний уровень дохода');
+    } else {
+        return ('Высокий уровень дохода');
+    }
+}
+console.log(getStatusIncome());
+
+
 
 function getTargetMonth(mission_par,accumulatedMonth_par){
     return Math.floor(mission_par/accumulatedMonth_par);
