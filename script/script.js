@@ -75,7 +75,7 @@ console.log('Накопления за период: ', accumulatedMonth);
 budgetDay = Math.floor(accumulatedMonth / 30);
 
 let getStatusIncome = function(){
-    if (budgetDay < 0){
+    if (budgetDay <= 0){
         return ('Что-то пошло не так');
     } else if (budgetDay <= 300){
         return ('Низкий уровень дохода');
@@ -85,15 +85,18 @@ let getStatusIncome = function(){
         return ('Высокий уровень дохода');
     }
 }
-console.log(getStatusIncome());
-
-
+console.log('getStatusIncome() :',getStatusIncome());
 
 function getTargetMonth(mission_par,accumulatedMonth_par){
     return Math.floor(mission_par/accumulatedMonth_par);
 }
-if (getTargetMonth (mission,accumulatedMonth) > 0){
+if (getTargetMonth (mission,accumulatedMonth) > 0 && 
+   (getTargetMonth (mission,accumulatedMonth) != Infinity)) {
     console.log('Cрок достижения цели в месяцах', getTargetMonth (mission,accumulatedMonth));
+
+} else if  (getTargetMonth (mission,accumulatedMonth) == Infinity) {
+    console.log('Цель не будет достигнута, расходы равны доходам');
+
 } else {
-    console.log('Цель не будет достигнута, расходы выше доходов');
+    console.log('Цель не будет достигнута, доходы ниже расходов');
 }  
