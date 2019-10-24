@@ -6,10 +6,10 @@ const income = '40000', //Доп доход, фриланс
     period = 12; //Период
 
 // после комментария Максима изменил на (money <=0), но тогда не учитывает вариант NaN, поэтому вернул назад, 
-let money = +prompt('Ваш месячный доход?');
+let money = +prompt('Ваш месячный доход?', 80000);
 while  (!(money > 0)) {
    alert("Введите числовое значение, больше нуля");
-   money = parseInt(prompt('Ваш месячный доход?'));
+   money = parseInt(prompt('Ваш месячный доход?'), 80000);
 } 
 let addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую'),
     deposit = confirm ('Есть ли у вас депозит в банке?'),
@@ -42,10 +42,21 @@ while  (!(ExpensesAmount2 > 0)) {
 } 
 
 //  Вычислить доход за месяц, учитывая обязательные расходы, 
-let budgetMonth = (+money) + (+income) - ExpensesAmount1 - ExpensesAmount2;
+function getExpensesMonth(exp1,exp2){
+    return +exp1 + (+exp2);
+}
+
+function getAccumulatedMonth(money_par,income_par,getExpensesMonth_par){
+    return  +money_par + (+income_par) - getExpensesMonth_par;
+}
+let accumulatedMonth = getAccumulatedMonth(money,income,getExpensesMonth(ExpensesAmount1, ExpensesAmount2));
+console.log('Накопления за период: ', accumulatedMonth);
+
+//let budgetMonth = (+money) + (+income) - ExpensesAmount1 - ExpensesAmount2; 
+//accumulatedMonth заменил budgetMonth
 
 // Поправить budgetDay учитывая бюджет на месяц, а не месячный доход. 
-budgetDay = Math.floor(budgetMonth / 30);
+budgetDay = Math.floor(accumulatedMonth / 30);
 
 let getStatusIncome = function(){
     if (budgetDay <= 300) {
@@ -56,18 +67,7 @@ let getStatusIncome = function(){
         return ('Высокий уровень дохода');
     } 
 }
-console.log(getStatusIncome());
-
-function getExpensesMonth(exp1,exp2){
-    return +exp1 + (+exp2);
-    }
-
-function getAccumulatedMonth(money_par,income_par,getExpensesMonth_par){
-    return  +money_par + (+income_par) - getExpensesMonth_par;
-}
-
-let accumulatedMonth = getAccumulatedMonth(money,income,getExpensesMonth(ExpensesAmount1, ExpensesAmount2));
-console.log('Накопления за период: ', accumulatedMonth);
+console.log('getStatusIncome():', getStatusIncome());
 
 function getTargetMonth(mission_par,accumulatedMonth_par){
     return Math.floor(mission_par/accumulatedMonth_par);
