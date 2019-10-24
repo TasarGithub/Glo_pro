@@ -1,19 +1,23 @@
 // Lesson 04
 
 'use strict';
-const income = '40000', //Доп доход, фриланс
+const income = 'фриланс, перевозки', //Доп доход, фриланс
     mission = 1500000, // Какую сумму хочу накопить
     period = 12; //Период
 
-// после комментария Максима изменил на (money <=0), но тогда не учитывает вариант NaN, поэтому вернул назад, 
-let money = +prompt('Ваш месячный доход?', 80000);
-while  (!(money > 0)) {
-   alert("Введите числовое значение, больше нуля");
-   money = parseInt(prompt('Ваш месячный доход?'), 80000);
+// Функция определения числа
+const isNum = function(n){
+    return (!isNaN(parseFloat(n)) && isFinite(n));
+}
+
+let money = prompt('Ваш месячный доход?', 80000);
+console.log((isNum(money)));
+while (!isNum(money)){
+   money = prompt('Ваш месячный доход?', 80000);
 } 
 let addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую'),
     deposit = confirm ('Есть ли у вас депозит в банке?'),
-    budgetDay = money/30; //Дневной бюджет
+    budgetDay = money / 30; //Дневной бюджет
 
     let showTypeof = function(data){
     console.log(data, typeof(data));
@@ -23,22 +27,20 @@ showTypeof (money);
 showTypeof (income);
 showTypeof (deposit);
 
-let Expenses1 = prompt('Обязательный ежемесячный расход. Вариант1'),
-    ExpensesAmount1=  +prompt('Во сколько это обойдется? Вариант1', 5000);
+let expenses1 = prompt('Обязательный ежемесячный расход. Вариант1'),
+    expensesAmount1 = prompt('Во сколько это обойдется? Вариант1', 5000);
 
 //Проверка корректности ввода расходов
-while  (!(ExpensesAmount1 > 0)) {
-    alert("Введит числовое значение, больше нуля");
-    ExpensesAmount1 = +prompt('Обязательные ежемесячные расходы, сумма. Введите числом');
+while  (!isNum(expensesAmount1)) {
+    expensesAmount1 = prompt('Во сколько это обойдется? Вариант1', 5000);
 } 
 
-let Expenses2 = prompt('Обязательный ежемесячный расход. Вариант2'),
-    ExpensesAmount2 = +prompt('Во сколько это обойдется? Вариант2', 7000);
+let expenses2 = prompt('Обязательный ежемесячный расход. Вариант2'),
+    expensesAmount2 = prompt('Во сколько это обойдется? Вариант2', 7000);
 
 //Проверка корректности ввода расходов
-while  (!(ExpensesAmount2 > 0)) {
-    alert("Введит числовое значение, больше нуля");
-    ExpensesAmount2 = +prompt('Обязательные ежемесячные расходы, сумма. Введите числом');
+while  (!isNum(expensesAmount2)) {
+    expensesAmount2 = prompt('Во сколько это обойдется? Вариант2', 7000);
 } 
 
 //  Вычислить доход за месяц, учитывая обязательные расходы, 
@@ -46,13 +48,13 @@ function getExpensesMonth(exp1,exp2){
     return +exp1 + (+exp2);
 }
 
-function getAccumulatedMonth(money_par,income_par,getExpensesMonth_par){
-    return  +money_par + (+income_par) - getExpensesMonth_par;
+function getAccumulatedMonth(money_par,getExpensesMonth_par){
+    return  money_par - getExpensesMonth_par;
 }
-let accumulatedMonth = getAccumulatedMonth(money,income,getExpensesMonth(ExpensesAmount1, ExpensesAmount2));
+let accumulatedMonth = getAccumulatedMonth(money,getExpensesMonth(expensesAmount1, expensesAmount2));
 console.log('Накопления за период: ', accumulatedMonth);
 
-//let budgetMonth = (+money) + (+income) - ExpensesAmount1 - ExpensesAmount2; 
+//let budgetMonth = money - expensesAmount1 - expensesAmount2; 
 //accumulatedMonth заменил budgetMonth
 
 // Поправить budgetDay учитывая бюджет на месяц, а не месячный доход. 
@@ -70,6 +72,6 @@ let getStatusIncome = function(){
 console.log('getStatusIncome():', getStatusIncome());
 
 function getTargetMonth(mission_par,accumulatedMonth_par){
-    return Math.floor(mission_par/accumulatedMonth_par);
+    return Math.floor(mission_par / accumulatedMonth_par);
 }
 console.log('Cрок достижения цели в месяцах', getTargetMonth (mission,accumulatedMonth));
