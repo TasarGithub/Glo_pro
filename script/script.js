@@ -5,67 +5,58 @@ const income = '40000', //Доп доход, фриланс
     mission = 1500000, // Какую сумму хочу накопить
     period = 12; //Период
 
+// Функция определения числа
+const isNum = function(n){
+    return (!isNaN(parseFloat(n)) && isFinite(n));
+}
+
 let money; 
 //1) Переписать функцию start циклом do while
 let start = function(){
     do {
-        money = +prompt('Ваш месячный доход?',80000);    
-    } while  (money <= 0 || isNaN(money) || money == null) ;
+        money = prompt('Ваш месячный доход?',80000);    
+    } while (!isNum(money));
 }
 start();
 
 let addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую'),
     deposit = confirm ('Есть ли у вас депозит в банке?'),
-    budgetDay = money/30; //Дневной бюджет
-
-// в 5 уроке showTypeof не требуется для вывода, поэтому комментирую
-//     let showTypeof = function(data){
-//     console.log(data, typeof(data));
-// }
-
-// // в 5 уроке это не требуется для вывода, поэтому комментирую
-// showTypeof (money);
-// showTypeof (income);
-// showTypeof (deposit);
+    budgetDay = money / 30; //Дневной бюджет
 
 
-let Expenses1,
-    Expenses2;
+let expenses1,
+    expenses2;
     
 
 let getExpensesMonth = function(){
     
-    let ExpensesAmount,
+    let expensesAmount,
         sum = 0;
     
     for (let i = 0; i < 2; i++){
                 
-        if (i == 0) Expenses1 = prompt('Введите обязательную статью расходов.', 'Транспорт');
-        if (i == 1) Expenses2 = prompt('Введите обязательную статью расходов.', 'Кредит');
+        if (i === 0) expenses1 = prompt('Введите обязательную статью расходов.', 'Транспорт');
+        if (i === 1) expenses2 = prompt('Введите обязательную статью расходов.', 'Кредит');
         //2) Добавить валидацию (проверку) на данные которые мы получаем на вопрос 
         //'Во сколько это обойдется?’ в функции  getExpensesMonth
         do {
-            ExpensesAmount = +prompt('Во сколько это обойдется? ', 7000);
-        } while  (!(ExpensesAmount > 0));
+            expensesAmount = prompt('Во сколько это обойдется? ', 7000);
+        } while (!isNum(expensesAmount));
         
-        sum+=ExpensesAmount;
+        sum += +expensesAmount;
     }
     return sum;
 }
 
-function getAccumulatedMonth(money_par,income_par,getExpensesMonth_par){
-    return  +money_par + (+income_par) - getExpensesMonth_par;
+function getAccumulatedMonth(money_par,getExpensesMonth_par){
+    return money_par - getExpensesMonth_par;
 }
 
-let accumulatedMonth = getAccumulatedMonth(money,income,getExpensesMonth ());
+let accumulatedMonth = getAccumulatedMonth(money,getExpensesMonth());
 console.log('Накопления за период: ', accumulatedMonth);
-
-// budgetMonth = accumulatedMonth, поэтому заккоментировал.
-// let budgetMonth = (+money) + (+income) - ExpensesMonth;
 
 // Поправить budgetDay учитывая бюджет на месяц, а не месячный доход. 
 budgetDay = Math.floor(accumulatedMonth / 30);
-
 
 //4) Если budgetDay отрицательное значение, 
 //   то вместо уровня дохода пусть выводится сообщение “Что то пошло не так”
@@ -86,15 +77,16 @@ console.log('getStatusIncome() :',getStatusIncome());
 //необходимо выводить “Цель не будет достигнута”
 
 function getTargetMonth(mission_par,accumulatedMonth_par){
-    return Math.floor(mission_par/accumulatedMonth_par);
+    return Math.floor(mission_par / accumulatedMonth_par);
 }
-if (getTargetMonth (mission,accumulatedMonth) > 0 && 
-   (getTargetMonth (mission,accumulatedMonth) != Infinity)) {
+
+if ((getTargetMonth (mission,accumulatedMonth) > 0) && 
+    (isFinite(getTargetMonth (mission,accumulatedMonth)))) {
     console.log('Cрок достижения цели в месяцах', getTargetMonth (mission,accumulatedMonth));
 
-} else if  (getTargetMonth (mission,accumulatedMonth) == Infinity) {
+} else if (!isFinite(getTargetMonth (mission,accumulatedMonth))) {
     console.log('Цель не будет достигнута, расходы равны доходам');
 
 } else {
     console.log('Цель не будет достигнута, доходы ниже расходов');
-}  
+}
