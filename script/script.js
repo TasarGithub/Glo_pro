@@ -1,26 +1,40 @@
-// Lesson 05
-
+// Lesson 06
 'use strict';
-const income = '40000', //Доп доход, фриланс
-    mission = 1500000, // Какую сумму хочу накопить
-    period = 12; //Период
+let money, 
+    start = function(){
+    do {
+        money = prompt('Ваш месячный доход?',80000);    
+    } while (!isNum(money));
+}
+
+// const income = '40000', //Доп доход, фриланс
+//     mission = 1500000, // Какую сумму хочу накопить
+//     period = 12; //Период
 
 // Функция определения числа
 const isNum = function(n){
     return (!isNaN(parseFloat(n)) && isFinite(n));
 }
 
-let money; 
-//1) Переписать функцию start циклом do while
-let start = function(){
-    do {
-        money = prompt('Ваш месячный доход?',80000);    
-    } while (!isNum(money));
-}
 start();
 
-let addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую'),
-    deposit = confirm ('Есть ли у вас депозит в банке?'),
+let  appData = {
+    income: {},
+    addIncome: [],
+    expenses: {},
+    addExpenses: [],
+    deposit: false,
+    mission: 80000,
+    period: 12,
+    asking: function(){
+            appData.addExpenses = prompt('Перечислите возможные расходы '+
+            'за рассчитываемый период через запятую'),
+            appData.deposit = confirm ('Есть ли у вас депозит в банке?');
+            appData.addExpenses
+    }
+}
+
+
     budgetDay = money / 30; //Дневной бюджет
 
 
