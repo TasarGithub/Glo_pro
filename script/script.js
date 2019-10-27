@@ -1,5 +1,10 @@
 // Lesson 06
 'use strict';
+// Функция определения числа
+const isNum = function(n){
+    return (!isNaN(parseFloat(n)) && isFinite(n));
+}
+
 let money, 
     start = function(){
     do {
@@ -7,10 +12,7 @@ let money,
     } while (!isNum(money));
 }
 
-// Функция определения числа
-const isNum = function(n){
-    return (!isNaN(parseFloat(n)) && isFinite(n));
-}
+
 
 start();
 
@@ -46,8 +48,8 @@ let  appData = {
         appData.budgetMonth = appData.budget - appData.expensesMonth;
         appData.budgetDay = appData.budgetMonth / 30;
     },
-    getTargetMonth: function(mission_par,accumulatedMonth_par){
-        return Math.ceil(mission_par / accumulatedMonth_par);
+    getTargetMonth: function(){
+        return Math.ceil(appData.mission / appData.budgetMonth);
     },
     getStatusIncome: function(){
         if (appData.budgetDay <= 0){
@@ -95,7 +97,7 @@ console.log('Расходы за месяц: ', appData.expensesMonth);
 // — За какой период будет достигнута цель (в месяцах)
 appData.getBudget();
 console.log('За какой период будет достигнута цель (в месяцах): ',
-    Math.ceil(appData.mission / appData.budgetMonth));
+    appData.getTargetMonth());
 // — Уровень дохода
 console.log('Уровень дохода: ', appData.getStatusIncome());
 
