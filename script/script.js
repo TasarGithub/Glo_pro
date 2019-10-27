@@ -105,4 +105,7 @@ console.log('Уровень дохода: ', appData.getStatusIncome());
 
 //10) Используя цикл for in для объекта (appData), вывести в консоль сообщение
 //    "Наша программа включает в себя данные: " (вывести весь appData)
-
+console.log('Наша программа включает в себя данные:');
+for (let key in appData){
+    console.log(key, appData[key]);
+}
