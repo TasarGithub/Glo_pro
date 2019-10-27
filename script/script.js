@@ -26,7 +26,7 @@ let  appData = {
     },
     addExpenses: [],
     deposit: false,
-    mission: 80000,
+    mission: 1500000,
     period: 12,
 //2) В объект appData добавить свойство budget которое будет принимать значение money
     budget: money,
@@ -34,17 +34,20 @@ let  appData = {
     budgetDay: 0,
     budgetMonth: 0,
     expensesMonth: 0,
-//4) Функции getExpensesMonth, getAccumulatedMonth, getTargetMonth, getStatusIncome - сделать методами объекта AppData
+//4) Функции getExpensesMonth, getAccumulatedMonth, getTargetMonth, getStatusIncome - 
+//   сделать методами объекта AppData
     getExpensesMonth: function(){
+        // 7) Метод getExpensesMonth будет считать сумму всех обязательных расходов и
+        // сохранять результат в свойство expensesMonth  для того, чтобы посчитать 
+        // сумму используйте цикл for in
         for (let key in appData.expenses){
             appData.expensesMonth += appData.expenses[key];
-            console.log(key);
         }
-        console.log('appData.expensesMonth: ', appData.expensesMonth);
     },
     getBudget: function (){
+        // 8) getAccumulatedMonth переименовать в getBudget. Этот метод будет считать budgetMonth и
+        // budgetDay (перенести эти команды в этот метод)
         appData.budgetMonth = appData.budget - appData.expensesMonth;
-        console.log('appData.budget - appData.expensesMonth: ', appData.budget - appData.expensesMonth);
         appData.budgetDay = appData.budgetMonth/30;
     },
     getTargetMonth: function(mission_par,accumulatedMonth_par){
@@ -61,7 +64,6 @@ let  appData = {
             return ('Высокий уровень дохода');
         }
     },
-
     // 6) Из метода  getExpensesMonth перенести цикл в метод asking,  
     // и переписать цикл таким образом чтобы результат записывался в объект  appData.expenses
     // в формате:
@@ -71,42 +73,33 @@ let  appData = {
     //     “ответ на первый вопрос” : “ответ на второй вопрос”
     //     }
     asking: function(){
-        let addExpenses = prompt('Перечислите возможные расходы '+
+        let expensesAmount, expensesName,
+            addExpenses = prompt('Перечислите возможные расходы '+
         'за рассчитываемый период через запятую');
         appData.addExpenses = addExpenses.toLowerCase().split(',');
         appData.deposit = confirm ('Есть ли у вас депозит в банке?');
 
-        let expensesAmount, expensesName;
-        // sum = 0;
-
         for (let i = 0; i < 2; i++){
 
-            if (i === 0) expensesName = prompt('Введите обязательную статью расходов.', 'Насилие');
-            if (i === 1) expensesName = prompt('Введите обязательную статью расходов.', 'Бухач');
+            if (i === 0) expensesName = prompt('Введите обязательную статью расходов.', 'Наркотики');
+            if (i === 1) expensesName = prompt('Введите обязательную статью расходов.', 'Оружие');
             do {
                     expensesAmount = prompt('Во сколько это обойдется? ', 7000);
             } while (!isNum(expensesAmount));
             appData.expenses[expensesName] = +expensesAmount;
-            console.log('appData.expenses[expensesName]: ',expensesName, appData.expenses[expensesName]);
-
         }
-
-
     }
-
 }
 
-console.log('appData.asking();: ', appData.asking());
-console.log('appData.expenses: ', appData.expenses);
-
-// В консоль вывести: 
-
+// 9) Вызвать все необходимые методы, чтобы корректно считались все данные. В консоль вывести: 
 // — Расходы за месяц
+appData.asking();
+appData.getExpensesMonth();
 console.log('Расходы за месяц: ', appData.expensesMonth);
 // — За какой период будет достигнута цель (в месяцах)
-Math.ceil(appData.mission / appData.budgetMonth);
+appData.getBudget();
 console.log('За какой период будет достигнута цель (в месяцах): ',
     Math.ceil(appData.mission / appData.budgetMonth));
 // — Уровень дохода
-console.log('getStatusIncome: ', appData.getStatusIncome());
+console.log('Уровень дохода: ', appData.getStatusIncome());
 
