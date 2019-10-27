@@ -7,10 +7,6 @@ let money,
     } while (!isNum(money));
 }
 
-// const income = '40000', //Доп доход, фриланс
-//     appData.mission = 1500000, // Какую сумму хочу накопить
-//     period = 12; //Период
-
 // Функция определения числа
 const isNum = function(n){
     return (!isNaN(parseFloat(n)) && isFinite(n));
