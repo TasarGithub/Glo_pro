@@ -48,7 +48,7 @@ let  appData = {
         // 8) getAccumulatedMonth переименовать в getBudget. Этот метод будет считать budgetMonth и
         // budgetDay (перенести эти команды в этот метод)
         appData.budgetMonth = appData.budget - appData.expensesMonth;
-        appData.budgetDay = appData.budgetMonth/30;
+        appData.budgetDay = appData.budgetMonth / 30;
     },
     getTargetMonth: function(mission_par,accumulatedMonth_par){
         return Math.floor(mission_par / accumulatedMonth_par);
@@ -102,4 +102,7 @@ console.log('За какой период будет достигнута цел
     Math.ceil(appData.mission / appData.budgetMonth));
 // — Уровень дохода
 console.log('Уровень дохода: ', appData.getStatusIncome());
+
+//10) Используя цикл for in для объекта (appData), вывести в консоль сообщение
+//    "Наша программа включает в себя данные: " (вывести весь appData)
 
