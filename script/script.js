@@ -80,8 +80,8 @@ let  appData = {
     appData.getInfoDeposit ();
 
     for (let i = 0; i < 2; i++){
-            if (i === 0) expensesName = prompt('Введите обязательную статью расходов.', 'Наркотики');
-            if (i === 1) expensesName = prompt('Введите обязательную статью расходов.', 'Оружие');
+            if (i === 0) expensesName = prompt('Введите обязательную статью расходов.', 'Антиквариат');
+            if (i === 1) expensesName = prompt('Введите обязательную статью расходов.', 'Коллекционное вино');
 
             expensesAmount = appData.checkInput(expensesName, 1, 'Во сколько это обойдется?', 7000);
             
