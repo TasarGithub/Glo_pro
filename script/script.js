@@ -31,27 +31,64 @@ let  appData = {
     budgetMonth: 0,
     expensesMonth: 0,
 
+//     1) Сделать проверку при получении данных:
+//    - наименование дополнительного источника заработка
+//    - сумма дополнительного заработка -  ввод статьи обязательных расходов
+//    - годовой процент депозита  - сумма депозита
+
     asking: function(){
 
     if (confirm('Есть  доп заработок')) {
-        let itemIncome = prompt ('Какой у вас дополнительный заработок?', 'Консультации');
-        let cashIncome = prompt ('Сколько в месяц вы на этом зарабатывете?', 10000);
+        let itemIncome,
+            cashIncome;
+            itemIncome = appData.checkInput(itemIncome, 0, 'Какой у вас дополнительный заработок?', 'Консультации');
+            cashIncome = appData.checkInput(cashIncome, 1, 'Сколько в месяц вы на этом зарабатывете?', 10000);
+
         appData.income[itemIncome] = cashIncome;
     }
 
     let expensesAmount, expensesName,
+
+    // 2) Возможные расходы (addExpenses) вывести строкой в консоль каждое слово с
+    // большой буквы слова разделены запятой и пробелом
         addExpenses = prompt('Перечислите возможные расходы '+
-    'за рассчитываемый период через запятую');
+    'за рассчитываемый период через запятую', 'набали, нашриланку, втай');
+    let outStrAddexpenses = '',
+        strTemp = "";
     appData.addExpenses = addExpenses.toLowerCase().split(',');
+    for (let i = 0; i <  appData.addExpenses.length; i++){
+
+        //Убираем пробелы в элементах массива слов.
+        appData.addExpenses[i] = appData.addExpenses[i].trim();
+
+        //Запомнили слово без первой букквы
+        strTemp = appData.addExpenses[i].slice(1);
+
+        //Складываем новые слова с большой буквы + пробели запятая. Если конец строки, то пробел и запятая не нужны.
+        if (i == appData.addExpenses.length -1 ) { 
+            strTemp = appData.addExpenses[i][0].toUpperCase() + strTemp;
+         } else {
+            strTemp = appData.addExpenses[i][0].toUpperCase()+ strTemp + ', ';
+         }
+        // Складываем конечную строку
+        outStrAddexpenses += strTemp;
+    }    
+    console.log (outStrAddexpenses);   
+    
+
     appData.deposit = confirm ('Есть ли у вас депозит в банке?');
     appData.getInfoDeposit ();
 
     for (let i = 0; i < 2; i++){
             if (i === 0) expensesName = prompt('Введите обязательную статью расходов.', 'Наркотики');
             if (i === 1) expensesName = prompt('Введите обязательную статью расходов.', 'Оружие');
-            do {
-                    expensesAmount = prompt('Во сколько это обойдется? ', 7000);
-            } while (!isNum(expensesAmount));
+
+            expensesAmount = appData.checkInput(expensesName, 1, 'Во сколько это обойдется?', 7000);
+            
+            // do {
+            //     expensesAmount = prompt('Во сколько это обойдется? ', 7000);
+            // } while (!isNum(expensesAmount));            
+
             appData.expenses[expensesName] = +expensesAmount;
         }
     },
@@ -80,12 +117,30 @@ let  appData = {
     },
     getInfoDeposit: function(){
         if (appData.deposit) {
-            appData.percentDeposit = prompt ('Какой годовой процент?', '10'),
-            appData.moneyDeposit = prompt ('Какая сумма на депозите?', 10000);
+            //appData.percentDeposit = prompt ('Какой годовой процент?', '10'),
+            appData.percentDeposit = appData.checkInput(appData.percentDeposit, 1, 'Какой годовой процент?', 10);
+            appData.moneyDeposit = appData.checkInput(appData.percentDeposit, 1, 'Какая сумма на депозите?', 10000);
         }        
     },
     calcSavedMoney: function(){
+        
+        console.log('appData.period: ', appData.period);
+        console.log('appData.budgetMonth: ', appData.budgetMonth);
+
         return appData.budgetMonth * appData.period;
+    },
+    checkInput: function(checkItem,strOrNum,promptMessage,defaultItem){
+        // strOrNum:  false - str, true - Num
+        if (!!strOrNum) { 
+            do {
+                checkItem = prompt(promptMessage, defaultItem);
+            } while (!isNum(checkItem));
+        } else {
+            do {
+                checkItem = prompt(promptMessage, defaultItem);
+            } while (isNum(checkItem));
+        }
+        return checkItem;
     }
 }
 
