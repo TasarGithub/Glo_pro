@@ -52,7 +52,7 @@ let  appData = {
     // 2) Возможные расходы (addExpenses) вывести строкой в консоль каждое слово с
     // большой буквы слова разделены запятой и пробелом
         addExpenses = prompt('Перечислите возможные расходы '+
-    'за рассчитываемый период через запятую', 'набали, нашриланку, втай');
+    'за рассчитываемый период через запятую', 'набали, нашриланку, втай, всибирь');
     let outStrAddexpenses = '',
         strTemp = "";
     appData.addExpenses = addExpenses.toLowerCase().split(',');
@@ -164,3 +164,4 @@ for (let key in appData){
 console.log('calcSavedMoney: ', appData.calcSavedMoney());
 console.log('appData.percentDeposit: ', appData.percentDeposit);
 console.log('appData.moneyDeposit: ', appData.moneyDeposit);
+console.log (outStrAddexpenses); 
