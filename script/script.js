@@ -164,4 +164,3 @@ for (let key in appData){
 console.log('calcSavedMoney: ', appData.calcSavedMoney());
 console.log('appData.percentDeposit: ', appData.percentDeposit);
 console.log('appData.moneyDeposit: ', appData.moneyDeposit);
-console.log (outStrAddexpenses); 
