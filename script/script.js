@@ -75,7 +75,7 @@ let  appData = {
     }    
     console.log (outStrAddexpenses);   
     
-
+dsdsd
     appData.deposit = confirm ('Есть ли у вас депозит в банке?');
     appData.getInfoDeposit ();
 
