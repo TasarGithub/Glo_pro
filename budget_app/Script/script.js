@@ -168,9 +168,9 @@ let appData = {
   }
 }
 
-start.eventListener('click',appData.start);
+start.addEventListener('click',appData.start);
 
-appData.getTargetMonth());
+appData.getTargetMonth();
 console.log('Уровень дохода: ', appData.getStatusIncome());
 console.log('Наша программа включает в себя данные:');
 for (let key in appData){
