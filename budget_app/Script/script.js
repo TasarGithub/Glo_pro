@@ -3,37 +3,39 @@
 
 // Получить кнопку "Рассчитать" через id
 const start = document.querySelector('#start');
-const btnAll = document.querySelectorAll('button'),
-    btnPusIncome = btnAll [0],
-    btnPusExpenses = btnAll [1];
-const chkBox = document.getElementById('#deposit-check'),
-  budgetMonthValue = document.querySelector('.budget_month-value'),
+const btnPlus = document.querySelectorAll('button'),
+  btnIncomePlus = btnPlus [0],
+  btnExpensesPlus = btnPlus [1],
+  depositCheck = document.getElementById('#deposit-check'),
   budgetDayValue = document.querySelector('.budget_day-value'),
+  budgetMonthValue = document.querySelector('.budget_month-value'),
   expensesMonthValue = document.querySelector('.expenses_month-value'),
-  targetAmount = document.querySelector('.target-amount'),
-  depositPercent = document.querySelector('.deposit-percent'),
-  depositAmount = document.querySelector('.deposit-amount'),
-  depositBank = document.querySelector('.deposit-bank'),
-  additionalExpensesIem = document.querySelector('.additional_expenses-iem'),
-  additionalIncomeItem = document.querySelector('.additional_income-item'),
+  accumulateMonthValue = document.querySelector('.accumulate_month-value'),
   additionalIncomeValue = document.querySelector('.additional_income-value'),
   additionalExpensesValue = document.querySelector('.additional_expenses-value'),
-  incomePeriodValue = document.querySelector('.income_period-value'),
   targetMonthValue = document.querySelector('.target_month-value'),
+  incomePeriodValue = document.querySelector('.income_period-value'),
+  targetAmount = document.querySelector('.target-amount'),
   salaryAmount = document.querySelector('.salary-amount'),
   incomeAmount = document.querySelector('.income-amount'),
   incomeTitle = document.querySelector('.income-title'),
   expensesAmount = document.querySelector('.expenses-amount'),
   expensesTitle = document.querySelector('.expenses-title'),
   additionalExpenses = document.querySelector('.additional_expenses'),
-  periodSelect = document.querySelector('.period-select');
+  periodSelect = document.querySelector('.period-select'),
+  income = document.querySelectorAll('.income'),
+  incomeItems = document.querySelector('.income-items'),
+
+  depositPercent = document.querySelector('.deposit-percent'),
+  depositAmount = document.querySelector('.deposit-amount'),
+  depositBank = document.querySelector('.deposit-bank'),
+  additionalExpensesIem = document.querySelector('.additional_expenses-iem'),
+  additionalIncomeItem = document.querySelector('.additional_income-item');
 
 // Функция определения числа
 const isNum = function(n){
   return (!isNaN(parseFloat(n)) && isFinite(n));
 }
-
-
 
 let appData = {
   income: {},
@@ -53,14 +55,21 @@ let appData = {
   expensesMonth: 0,
 
   start: function() {
-    do {
-        money = prompt('Ваш месячный доход?',80000);    
-    } while (!isNum(money));
+    if (salaryAmount.value ===''){
+      alert('Ошибка, поле месячный доход должно быть заполнено');
+      return;
+    }
+    appData.budget = salaryAmount.value;
+    console.log('salaryAmount.value: ', salaryAmount.value);
+
     // appData.asking();
     // appData.getExpensesMonth();
     // appData.getBudget();
   },
-  
+  addExpensesBlock(){
+    let newBlock = document.createElement('div');
+    income[0].appenChild(newBlock);
+  },
   asking: function() {
     if (confirm('Есть  доп заработок')) {
       const itemIncome = appData.checkInput(0, 'Какой у вас дополнительный заработок?', 'Консультации');
@@ -93,6 +102,8 @@ let appData = {
 
     appData.deposit = confirm('Есть ли у вас депозит в банке?');
     appData.getInfoDeposit();
+
+    appData.chkBox
 
     let expensesName;
     for (let i = 0; i < 2; i++){
@@ -157,14 +168,10 @@ let appData = {
 };
 
 start.addEventListener('click',appData.start);
+btnIncomePlus.addEventListener('click', appData.addExpensesBlock);
+
 
 appData.getTargetMonth();
-console.log('Уровень дохода: ', appData.getStatusIncome());
-console.log('Наша программа включает в себя данные:');
-for (const key in appData){
-  console.log(key, appData[key]);
-}
-
-console.log('calcSavedMoney: ', appData.calcSavedMoney());
-console.log('appData.percentDeposit: ', appData.percentDeposit);
-console.log('appData.moneyDeposit: ', appData.moneyDeposit);
+// for (const key in appData){
+//   console.log(key, appData[key]);
+// }
