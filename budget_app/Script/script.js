@@ -93,7 +93,7 @@ let appData = {
       strTemp = appData.addExpenses[i].slice(1);
 
       //Складываем новые слова с большой буквы + пробели запятая. Если конец строки, то пробел и запятая не нужны.
-      if (i == appData.addExpenses.length -1 ) { 
+      if (i === appData.addExpenses.length - 1) { 
           strTemp = appData.addExpenses[i][0].toUpperCase() + strTemp;
       } else {
           strTemp = appData.addExpenses[i][0].toUpperCase()+ strTemp + ', ';
@@ -101,10 +101,10 @@ let appData = {
       // Складываем конечную строку
       outStrAddexpenses += strTemp;
     }    
-    console.log (outStrAddexpenses);   
+    console.log(outStrAddexpenses);   
 
-    appData.deposit = confirm ('Есть ли у вас депозит в банке?');
-    appData.getInfoDeposit ();
+    appData.deposit = confirm('Есть ли у вас депозит в банке?');
+    appData.getInfoDeposit();
 
     let expensesName;
     for (let i = 0; i < 2; i++){
@@ -115,7 +115,7 @@ let appData = {
     }
   },
   getExpensesMonth: function(){
-      for (let key in appData.expenses){
+      for (const key in appData.expenses){
           appData.expensesMonth += appData.expenses[key];
       }
   },
@@ -166,14 +166,14 @@ let appData = {
       }
       
   }
-}
+};
 
 start.addEventListener('click',appData.start);
 
 appData.getTargetMonth();
 console.log('Уровень дохода: ', appData.getStatusIncome());
 console.log('Наша программа включает в себя данные:');
-for (let key in appData){
+for (const key in appData){
   console.log(key, appData[key]);
 }
 
