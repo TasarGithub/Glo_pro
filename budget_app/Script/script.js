@@ -63,11 +63,13 @@ let appData = {
   start: function() {
 
     //debugger;
-
-    if (salaryAmount.value ===''){
-      start.disabled = true;
-      return;
-    }
+  // 7) Вместо проверки поля Месячный доход в методе Start, запретить нажатие кнопки Рассчитать пока поле Месячный доход пустой
+    // if (salaryAmount.value ===''){
+    //   start.disabled = true;
+    //   //return;
+    // } else {
+    //   start.disabled = false;
+    // }
     appData.budget = +salaryAmount.value;
     appData.getIncome();
     appData.getExpenses();
@@ -84,24 +86,20 @@ let appData = {
 // рассчитать, после этого кнопка Рассчитать пропадает и появляется кнопка
 // Сбросить (есть в верстке) на кнопку сбросить пока ничего не навешиваем
 
-   // document.querySelectorAll('input').forEach(e => e.disabled = true);
+
   },
 
-  // 7) Вместо проверки поля Месячный доход в методе Start, запретить нажатие кнопки Рассчитать пока поле Месячный доход пустой
+  turnStartCancel(){
+    start.style.display = 'none';
+    cancel.style.display = "block";
+  },
 
-
-
-    turnStartCancel(){
-      start.style.display = 'none';
-      cancel.style.display = "block";
-    },
-
-    blockInput(){
-     let divData = document.querySelector('.data');
-     divData.querySelectorAll('input[type=text]').forEach(function(item){
-       item.disabled = true;
-     });
-    },
+  blockInput(){
+    let divData = document.querySelector('.data');
+    divData.querySelectorAll('input[type=text]').forEach(function(item){
+      item.disabled = true;
+    });
+  },
   showResult(){
     budgetMonthValue.value = appData.budgetMonth;
     budgetDayValue.value = appData.budgetDay;
@@ -243,8 +241,14 @@ let appData = {
       
   }
 };
+//debugger;
+//start.disabled = true;
 
-start.addEventListener('click',appData.start);
+salaryAmount.addEventListener('change',function(){
+  //debugger;
+ // start.disabled = false;
+  start.addEventListener('click',appData.start);
+});
 btnIncomePlus.addEventListener('click', appData.addIncomeBlock);
 btnExpensesPlus.addEventListener('click', appData.addExpensesBlock);
 periodSelect.addEventListener('change',appData.getPeriod);
