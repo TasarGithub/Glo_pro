@@ -1,6 +1,31 @@
+document.addEventListener('DOMContentloaded', function(){
 'use strict';
+let clickElem = null;
 
-let myElem =  (document.querySelector('body'));
+function greenHundler(event){
 
-myElem.title = 'Урок по DOM';
-console.log(myElem.title);
+  if(clickElem){
+    clickElem.classList.remove('green');
+  }
+
+  clickElem = event.currentTarget;
+  clickElem.classList.add('green');
+}
+
+document.querySelector('.event_btn').addEventListener('click',greenHundler);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+});
