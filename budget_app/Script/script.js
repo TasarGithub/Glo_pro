@@ -2,8 +2,9 @@
 // lesson08
 
 // Получить кнопку "Рассчитать" через id
-const start = document.querySelector('#start');
-const btnPlus = document.querySelectorAll('button'),
+const start = document.querySelector('#start'),
+  cancel = document.querySelector('#cancel'),
+  btnPlus = document.querySelectorAll('button'),
   btnIncomePlus = btnPlus [0],
   btnExpensesPlus = btnPlus [1],
   additionalIncomeItem = document.querySelectorAll('.additional_income-item'),
@@ -60,8 +61,11 @@ let appData = {
   
 
   start: function() {
+
+    //debugger;
+
     if (salaryAmount.value ===''){
-      alert('Ошибка, поле месячный доход должно быть заполнено');
+      start.disabled = true;
       return;
     }
     appData.budget = +salaryAmount.value;
@@ -73,9 +77,31 @@ let appData = {
     appData.getBudget();
 
     appData.showResult();
+    appData.blockInput();
+    appData.turnStartCancel();
    
+// 6) Блокировать все input[type=text] с левой стороны после нажатия кнопки
+// рассчитать, после этого кнопка Рассчитать пропадает и появляется кнопка
+// Сбросить (есть в верстке) на кнопку сбросить пока ничего не навешиваем
 
+   // document.querySelectorAll('input').forEach(e => e.disabled = true);
   },
+
+  // 7) Вместо проверки поля Месячный доход в методе Start, запретить нажатие кнопки Рассчитать пока поле Месячный доход пустой
+
+
+
+    turnStartCancel(){
+      start.style.display = 'none';
+      cancel.style.display = "block";
+    },
+
+    blockInput(){
+     let divData = document.querySelector('.data');
+     divData.querySelectorAll('input[type=text]').forEach(function(item){
+       item.disabled = true;
+     });
+    },
   showResult(){
     budgetMonthValue.value = appData.budgetMonth;
     budgetDayValue.value = appData.budgetDay;
@@ -87,7 +113,7 @@ let appData = {
     incomePeriodValue.value = appData.calcPeriod();
     
   },
-
+  // добавление блока расходов
   addExpensesBlock(){
     let cloneExpensesItem =  expensesItems[0].cloneNode(true);
     expensesItems[0].parentNode.insertBefore(cloneExpensesItem,btnExpensesPlus);
@@ -100,11 +126,11 @@ let appData = {
   //получить все расходы и записать их в объект
   //будем перебирать с помощью forEach все элементы с классом expenses-item
   getExpenses(){
-    expensesItems.forEach (function(item,i,arr){
-        //debugger;
+    expensesItems.forEach (function(item){
+       // debugger;
         let itemExpenses = item.querySelector('.expenses-title').value,
             cashExpenses = item.querySelector('.expenses-amount').value;
-        if (itemExpenses.value !== '' && cashExpenses !== ''){
+        if (itemExpenses !== '' && cashExpenses !== ''){
           appData.expenses[itemExpenses] = cashExpenses;
         }
     });
@@ -122,7 +148,7 @@ let appData = {
   //получить все доходы и записать их в объект
   //будем перебирать с помощью forEach все элементы с классом income-items
   getIncome(){
-    incomeItems.forEach (function(item,i,arr){
+    incomeItems.forEach (function(item){
         //debugger;
         let itemIncome = item.querySelector('.income-title').value,
             cashIncome = item.querySelector('.income-amount').value;
@@ -130,15 +156,15 @@ let appData = {
           appData.income[itemIncome] = cashIncome;
         }
         //debugger;
-        for (let key in appData.income){
-          appData.incomeMonth += +appData.income[key];
-        }
     });
+    for (let key in appData.income){
+      appData.incomeMonth += +appData.income[key];
+    }
   },
   getAddExpenses(){
     //appData.addExpenses 
     let addExpenses = additionalExpensesItem.value.split(',');
-     addExpenses.forEach(function(item,i,arr){
+     addExpenses.forEach(function(item){
        item = item.trim();
       if(item !== ''){
         appData.addExpenses.push(item);
@@ -157,7 +183,7 @@ let appData = {
 
   //4) Число под полоской (range) должно меняться в зависимости от позиции range
   getPeriod(event){
-    debugger;
+    //debugger;
     console.log (event);
     appData.period = document.querySelector('.period-select').value;
     periodAmount.textContent = appData.period;
@@ -220,7 +246,7 @@ let appData = {
 
 start.addEventListener('click',appData.start);
 btnIncomePlus.addEventListener('click', appData.addIncomeBlock);
-btnExpensesPlus.addEventListener('click', appData.addExpnsesBlock);
+btnExpensesPlus.addEventListener('click', appData.addExpensesBlock);
 periodSelect.addEventListener('change',appData.getPeriod);
 
 
