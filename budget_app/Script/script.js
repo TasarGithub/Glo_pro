@@ -102,10 +102,10 @@ let appData = {
   },
   // добавление блока расходов
   addExpensesBlock(){
-    let cloneExpensesItem =  expensesItems[0].cloneNode(true);
+    let cloneExpensesItem = expensesItems[0].cloneNode(true);
     expensesItems[0].parentNode.insertBefore(cloneExpensesItem,btnExpensesPlus);
     expensesItems =  document.querySelectorAll('.expenses-items');
-    if  (expensesItems.length === 3) {
+    if (expensesItems.length === 3) {
       btnExpensesPlus.style.display = 'none';
     }
   },
@@ -127,7 +127,7 @@ let appData = {
     let cloneIncomeItem = incomeItems[0].cloneNode(true);
     incomeItems[0].parentNode.insertBefore(cloneIncomeItem,btnIncomePlus);
     incomeItems = document.querySelectorAll('.income-items');
-    if  (incomeItems.length === 3) {
+    if (incomeItems.length === 3) {
       btnIncomePlus.style.display = 'none';
     }
   },
