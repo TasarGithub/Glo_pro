@@ -1,31 +1,34 @@
-document.addEventListener('DOMContentloaded', function(){
 'use strict';
-let clickElem = null;
+function one(){
+  console.log('one');
+  two();
+}
+function two(){
+  console.log('two');
+  three();
+}
+function three(){
+  console.log('three');
+}
+one();
 
-function greenHundler(event){
 
-  if(clickElem){
-    clickElem.classList.remove('green');
-  }
-
-  clickElem = event.currentTarget;
-  clickElem.classList.add('green');
+function test(){
+  console.log('hello', this);
 }
 
-document.querySelector('.event_btn').addEventListener('click',greenHundler);
+test();
 
+let obj = {
+x: 10,
+y: 20,
+test: newTest
+};
 
+function newTest(){
+  console.log('hello', this);
 
+}
+obj.test;
 
-
-
-
-
-
-
-
-
-
-
-
-});
+newTest();

@@ -54,24 +54,25 @@ let appData = {
   
 
   start: function(){
-
+    //newContext();
+    console.log(this);
     //debugger;
-    appData.budget = +salaryAmount.value;
-    appData.getIncome();
-    appData.getExpenses();
-    appData.getExpensesMonth();
-    appData.getAddExpenses();
-    appData.getAddIncome();
-    appData.getBudget();
-    appData.getTargetMonth();
-
-    appData.showResult();
+    this.budget = +salaryAmount.value;
+    this.getIncome();
+    this.getExpenses();
+    this.getExpensesMonth();
+    this.getAddExpenses();
+    this.getAddIncome();
+    this.getBudget();
+    this.getTargetMonth();
+    
+    this.showResult();
 // 6) ЗАДАНИЕ Блокировать все input[type=text] с левой стороны после нажатия кнопки
 // рассчитать,
-    appData.blockInput(); 
+    this.blockInput(); 
 // после этого кнопка Рассчитать пропадает и появляется кнопка
 // Сбросить (есть в верстке) на кнопку сбросить пока ничего не навешиваем
-    appData.turnStartCancel();
+    this.turnStartCancel();
   },
 
   turnStartCancel(){
@@ -86,18 +87,18 @@ let appData = {
     });
   },
   showResult(){
-    budgetMonthValue.value = appData.budgetMonth;
-    budgetDayValue.value = appData.budgetDay;
-    expensesMonthValue.value = appData.expensesMonth;
-    additionalExpensesValue.value = appData.addExpenses.join(', ');
-    additionalIncomeValue.value = appData.addIncome.join(', ');
-    targetMonthValue.value = appData.getTargetMonth(); 
+    budgetMonthValue.value = this.budgetMonth;
+    budgetDayValue.value = this.budgetDay;
+    expensesMonthValue.value = this.expensesMonth;
+    additionalExpensesValue.value = this.addExpenses.join(', ');
+    additionalIncomeValue.value = this.addIncome.join(', ');
+    targetMonthValue.value = this.getTargetMonth(); 
 // 5) ЗАДАНИЕ Добавить обработчик события внутри метода showResult, который будет отслеживать
 // период и сразу менять значение в поле “Накопления за период”
     periodSelect.addEventListener('change',function(){
-      appData.getPeriod();
+      this.getPeriod();
     });
-    incomePeriodValue.value = appData.calcPeriod();
+    incomePeriodValue.value = this.calcPeriod();
     
   },
   // добавление блока расходов
@@ -118,7 +119,7 @@ let appData = {
       let itemExpenses = item.querySelector('.expenses-title').value,
           cashExpenses = item.querySelector('.expenses-amount').value;
       if (itemExpenses !== '' && cashExpenses !== ''){
-        appData.expenses[itemExpenses] = cashExpenses;
+        this.expenses[itemExpenses] = cashExpenses;
       }
     });
   },
@@ -221,11 +222,14 @@ let appData = {
     }
   }
 };
+let hardBind = function(){
+  appData.start();
+};
 //debugger;
 // 7) ЗАДАНИЕ Вместо проверки поля Месячный доход в методе Start, запретить нажатие кнопки
 //  Рассчитать пока поле Месячный доход пустой
 salaryAmount.addEventListener('change',function(){
-  start.addEventListener('click',appData.start);
+  start.addEventListener('click',appData.start.call(appData));
 });
 btnIncomePlus.addEventListener('click', appData.addIncomeBlock);
 btnExpensesPlus.addEventListener('click', appData.addExpensesBlock);
