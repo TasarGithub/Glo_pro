@@ -104,7 +104,7 @@ let appData = {
   addExpensesBlock(){
     let cloneExpensesItem = expensesItems[0].cloneNode(true);
     expensesItems[0].parentNode.insertBefore(cloneExpensesItem,btnExpensesPlus);
-    expensesItems =  document.querySelectorAll('.expenses-items');
+    expensesItems = document.querySelectorAll('.expenses-items');
     if (expensesItems.length === 3) {
       btnExpensesPlus.style.display = 'none';
     }
