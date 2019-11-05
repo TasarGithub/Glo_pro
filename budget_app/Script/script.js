@@ -52,30 +52,40 @@ let appData = {
   moneyDeposit: 0,
   // period: 12, замена на элемент верстки period-select
   
+  //1) ЗАДАНИЕ Привязать контекст вызова функции start к appData 
   falshStart(){
     appData.start.call(appData);
   },
 
   start: function(){
-    //newContext();
+  //2) ЗАДАНИЕ В нашем объекте везде использовать this как ссылку на объект appData (где это возможно)    
     console.log(this);
     //debugger;
     this.budget = +salaryAmount.value;
     this.getIncome();
-    appData.getExpenses.call(appData);
-    this.getExpensesMonth();
+    this.getExpenses();
+    this.getExpensesMonth();  
     this.getAddExpenses();
     this.getAddIncome();
     this.getBudget();
     this.getTargetMonth();
     
     this.showResult();
-// 6) ЗАДАНИЕ Блокировать все input[type=text] с левой стороны после нажатия кнопки
-// рассчитать,
     this.blockInput(); 
-// после этого кнопка Рассчитать пропадает и появляется кнопка
-// Сбросить (есть в верстке) на кнопку сбросить пока ничего не навешиваем
     this.turnStartCancel();
+  },
+
+  // 4) ЗАДАНИЕ кнопка Сбросить, на которую навешиваем событие и выполнение метода reset
+  // Метод reset должен всю программу возвращать в исходное состояние
+  reset(){
+
+    document.querySelectorAll('input').forEach(function(item){
+      item.disabled = false;
+      item.value = '';
+      periodSelect.value = 1;
+      periodAmount.textContent = '1';
+    });
+
   },
 
   turnStartCancel(){
@@ -227,18 +237,17 @@ let appData = {
   }
 };
 
-//debugger;
-// 7) ЗАДАНИЕ Вместо проверки поля Месячный доход в методе Start, запретить нажатие кнопки
-//  Рассчитать пока поле Месячный доход пустой
+//1) ЗАДАНИЕ Привязать контекст вызова функции start к appData 
 salaryAmount.addEventListener('change',function(){
   start.addEventListener('click',appData.falshStart);
 });
+//3) ЗАДАНИЕ Проверить работу кнопок плюс и input-range (исправить если что-то не работает)
 btnIncomePlus.addEventListener('click', appData.addIncomeBlock);
 btnExpensesPlus.addEventListener('click', appData.addExpensesBlock);
- //4)ЗАДАНИЕ Число под полоской (range) должно меняться в зависимости от позиции range
+
 periodSelect.addEventListener('change', function(){
   appData.getPeriod();
-// 5) ЗАДАНИЕ Добавить обработчик события внутри метода showResult, который будет отслеживать
-// период и сразу менять значение в поле “Накопления за период”
+
   incomePeriodValue.value = appData.calcPeriod();
 });
+cancel.addEventListener('click', appData.reset);
