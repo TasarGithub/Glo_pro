@@ -1,5 +1,5 @@
 'use strict';
-// lesson08
+// lesson09
 
 // Получить кнопку "Рассчитать" через id
 const start = document.querySelector('#start'),
@@ -62,7 +62,7 @@ let appData = {
     //debugger;
     this.budget = +salaryAmount.value;
     this.getIncome();
-    this.getExpenses();
+    appData.getExpenses.call(appData);
     this.getExpensesMonth();
     this.getAddExpenses();
     this.getAddIncome();
@@ -122,7 +122,7 @@ let appData = {
       let itemExpenses = item.querySelector('.expenses-title').value,
           cashExpenses = item.querySelector('.expenses-amount').value;
       if (itemExpenses !== '' && cashExpenses !== ''){
-        this.expenses[itemExpenses] = cashExpenses;
+        appData.expenses[itemExpenses] = cashExpenses;
       }
     });
   },
@@ -172,42 +172,43 @@ let appData = {
   },
 
   getPeriod(){
-    appData.period = document.querySelector('.period-select').value;
-    periodAmount.textContent = appData.period;
+    this.period = document.querySelector('.period-select').value;
+    console.log('this.period: ', this);
+    periodAmount.textContent = this.period;
   },
 
   getExpensesMonth(){
-    for (const key in appData.expenses){
-      appData.expensesMonth += +appData.expenses[key];
+    for (const key in this.expenses){
+      this.expensesMonth += +this.expenses[key];
     }
   },
   getBudget(){
-    appData.budgetMonth = appData.budget + +appData.incomeMonth - appData.expensesMonth;
+    this.budgetMonth = this.budget + +this.incomeMonth - this.expensesMonth;
     //3) ЗАДАНИЕ Округлить вывод дневного бюджета
-    appData.budgetDay = Math.floor(appData.budgetMonth / 30);
+    this.budgetDay = Math.floor(this.budgetMonth / 30);
   },
   getTargetMonth(){
-    return Math.ceil(targetAmount.value / appData.budgetMonth);
+    return Math.ceil(targetAmount.value / this.budgetMonth);
   },
   getStatusIncome(){
-    if (appData.budgetDay <= 0){
+    if (this.budgetDay <= 0){
         return ('Что-то пошло не так');
-    } else if (appData.budgetDay <= 300){
+    } else if (this.budgetDay <= 300){
         return ('Низкий уровень дохода');
-    } else if (appData.budgetDay <= 800){
+    } else if (this.budgetDay <= 800){
         return ('Средний уровень дохода');
     } else {
         return ('Высокий уровень дохода');
     }
   },
   getInfoDeposit: function(){
-    if (appData.deposit) {
-      appData.percentDeposit = appData.checkInput(1, 'Какой годовой процент?', 10);
-      appData.moneyDeposit = appData.checkInput(1, 'Какая сумма на депозите?', 10000);
+    if (this.deposit) {
+      this.percentDeposit = this.checkInput(1, 'Какой годовой процент?', 10);
+      this.moneyDeposit = this.checkInput(1, 'Какая сумма на депозите?', 10000);
     }        
   },
   calcPeriod: function(){
-    return appData.budgetMonth * periodSelect.value;
+    return this.budgetMonth * periodSelect.value;
   },
   checkInput: function(strOrNum,promptMessage,defaultItem){
     let checkItem;
@@ -225,9 +226,7 @@ let appData = {
     }
   }
 };
-let hardBind = function(){
-  appData.start();
-};
+
 //debugger;
 // 7) ЗАДАНИЕ Вместо проверки поля Месячный доход в методе Start, запретить нажатие кнопки
 //  Рассчитать пока поле Месячный доход пустой
