@@ -1,7 +1,7 @@
 'use strict';
 // lesson09
 
-// Получить кнопку "Рассчитать" через id
+
 const start = document.querySelector('#start'),
   cancel = document.querySelector('#cancel'),
   btnPlus = document.querySelectorAll('button'),
@@ -27,7 +27,7 @@ const start = document.querySelector('#start'),
   depositBank = document.querySelector('.deposit-bank'),
   additionalExpensesIem = document.querySelector('.additional_expenses-iem'),
   additionalExpensesItem = document.querySelector('.additional_expenses-item'),
-  targetAmount = document.querySelector('.target-amount'), //получ на практике
+  targetAmount = document.querySelector('.target-amount'), 
   periodAmount = document.querySelector('.period-amount');
   let expensesItems = document.querySelectorAll('.expenses-items'),
       incomeItems =  document.querySelectorAll('.income-items');
@@ -106,8 +106,7 @@ let appData = {
     additionalExpensesValue.value = this.addExpenses.join(', ');
     additionalIncomeValue.value = this.addIncome.join(', ');
     targetMonthValue.value = this.getTargetMonth(); 
-// 5) ЗАДАНИЕ Добавить обработчик события внутри метода showResult, который будет отслеживать
-// период и сразу менять значение в поле “Накопления за период”
+
     periodSelect.addEventListener('change',function(){
       this.getPeriod();
     });
@@ -136,7 +135,7 @@ let appData = {
       }
     });
   },
-  //2) ЗАДАНИЕ Создать метод addIncomeBlock аналогичный addExpensesBlock
+  
   addIncomeBlock(){    
     let cloneIncomeItem = incomeItems[0].cloneNode(true);
     incomeItems[0].parentNode.insertBefore(cloneIncomeItem,btnIncomePlus);
@@ -145,9 +144,7 @@ let appData = {
       btnIncomePlus.style.display = 'none';
     }
   },
-  //1) ЗАДАНИЕ Переписать метод getIncome аналогично getExpenses
-  //получить все доходы и записать их в объект
-  //будем перебирать с помощью forEach все элементы с классом income-items
+ 
   getIncome(){
     incomeItems.forEach (function(item){
       //debugger;
@@ -194,7 +191,6 @@ let appData = {
   },
   getBudget(){
     this.budgetMonth = this.budget + +this.incomeMonth - this.expensesMonth;
-    //3) ЗАДАНИЕ Округлить вывод дневного бюджета
     this.budgetDay = Math.floor(this.budgetMonth / 30);
   },
   getTargetMonth(){
@@ -239,7 +235,7 @@ let appData = {
 
 //1) ЗАДАНИЕ Привязать контекст вызова функции start к appData 
 salaryAmount.addEventListener('change',function(){
-  start.addEventListener('click',appData.falshStart);
+  start.addEventListener('click', appData.falshStart);
 });
 //3) ЗАДАНИЕ Проверить работу кнопок плюс и input-range (исправить если что-то не работает)
 btnIncomePlus.addEventListener('click', appData.addIncomeBlock);
@@ -247,7 +243,6 @@ btnExpensesPlus.addEventListener('click', appData.addExpensesBlock);
 
 periodSelect.addEventListener('change', function(){
   appData.getPeriod();
-
   incomePeriodValue.value = appData.calcPeriod();
 });
 cancel.addEventListener('click', appData.reset);
