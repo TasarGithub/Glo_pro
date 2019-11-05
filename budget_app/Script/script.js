@@ -52,6 +52,9 @@ let appData = {
   moneyDeposit: 0,
   // period: 12, замена на элемент верстки period-select
   
+  falshStart(){
+    appData.start.call(appData);
+  },
 
   start: function(){
     //newContext();
@@ -229,7 +232,7 @@ let hardBind = function(){
 // 7) ЗАДАНИЕ Вместо проверки поля Месячный доход в методе Start, запретить нажатие кнопки
 //  Рассчитать пока поле Месячный доход пустой
 salaryAmount.addEventListener('change',function(){
-  start.addEventListener('click',appData.start.call(appData));
+  start.addEventListener('click',appData.falshStart);
 });
 btnIncomePlus.addEventListener('click', appData.addIncomeBlock);
 btnExpensesPlus.addEventListener('click', appData.addExpensesBlock);
