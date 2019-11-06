@@ -8,7 +8,6 @@ const start = document.querySelector('#start'),
   btnIncomePlus = btnPlus [0],
   btnExpensesPlus = btnPlus [1],
   additionalIncomeItem = document.querySelectorAll('.additional_income-item'),
-  depositCheck = document.getElementById('#deposit-check'),
   budgetDayValue = document.querySelector('.budget_day-value'),
   budgetMonthValue = document.querySelector('.budget_month-value'),
   expensesMonthValue = document.querySelector('.expenses_month-value'),
@@ -31,7 +30,8 @@ const start = document.querySelector('#start'),
   targetAmount = document.querySelector('.target-amount'), 
   periodAmount = document.querySelector('.period-amount');
   let expensesItems = document.querySelectorAll('.expenses-items'),
-      incomeItems =  document.querySelectorAll('.income-items');
+      incomeItems =  document.querySelectorAll('.income-items'),
+      depositCheck = document.getElementById('deposit-check');
 
 // Функция определения числа
 const isNum = function(n){
@@ -93,6 +93,7 @@ let appData = {
       }
       
     }
+    // возврат кнопки +
     btnExpensesPlus.style.display = 'block';
 
   // удаление  новых полей доп доходов
@@ -105,6 +106,7 @@ let appData = {
       }
       
     }
+     // возврат кнопки +
     btnIncomePlus.style.display = 'block';
 
     // Возвращаем   значения к началу
@@ -114,6 +116,10 @@ let appData = {
 
     periodSelect.value = 1;
     periodAmount.textContent = '1';
+    debugger;
+    //depositCheck = document.getElementById('#deposit-check');
+    depositCheck.checked = false;
+
     //меняем кнопку вновь на Рассчитать 
     this.turnStartCancel(0);
     // Разблокировка полей слева
