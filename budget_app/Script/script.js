@@ -25,6 +25,7 @@ const start = document.querySelector('#start'),
   depositPercent = document.querySelector('.deposit-percent'),
   depositAmount = document.querySelector('.deposit-amount'),
   depositBank = document.querySelector('.deposit-bank'),
+  depositCheckmark = document.querySelector('.deposit-checkmark'),
   additionalExpensesIem = document.querySelector('.additional_expenses-iem'),
   additionalExpensesItem = document.querySelector('.additional_expenses-item'),
   targetAmount = document.querySelector('.target-amount'), 
@@ -50,17 +51,20 @@ let appData = {
   deposit: false,
   percentDeposit: 0,
   moneyDeposit: 0,
+  docStateBegin: {},
   // period: 12, замена на элемент верстки period-select
   
-  //1) ЗАДАНИЕ Привязать контекст вызова функции start к appData 
-  falshStart(){
-    appData.start.call(appData);
-  },
-
   start: function(){
   //2) ЗАДАНИЕ В нашем объекте везде использовать this как ссылку на объект appData (где это возможно)    
-    console.log(this);
+    console.log('start',this);
+    //alert ('Введите сумму месячного дохода');
     //debugger;
+    this.docStateBegin = document;//.querySelectorAll()
+    salaryAmount.value=salaryAmount.value.trim();
+    if (!isNum(salaryAmount.value) || salaryAmount.value === '') {
+      alert ('Введите сумму месячного дохода');
+      return;
+    }
     this.budget = +salaryAmount.value;
     this.getIncome();
     this.getExpenses();
@@ -71,34 +75,90 @@ let appData = {
     this.getTargetMonth();
     
     this.showResult();
-    this.blockInput(); 
-    this.turnStartCancel();
+    
+    this.turnStartCancel(1);
+    this.blockUnBlockInput(1); 
   },
-
   // 4) ЗАДАНИЕ кнопка Сбросить, на которую навешиваем событие и выполнение метода reset
   // Метод reset должен всю программу возвращать в исходное состояние
   reset(){
+      //debugger;
+      // удаление  новых полей доп расходов
+    expensesItems = document.querySelectorAll('.expenses-items');
+    if (expensesItems.length > 1) {
+      for (let i = (expensesItems.length - 1); i >= 1 ; i--){
+        if (expensesItems[i].parentNode) {
+          expensesItems[i].parentNode.removeChild(expensesItems[i]);
+        }
+      }
+      
+    }
+    btnExpensesPlus.style.display = 'block';
 
+  // удаление  новых полей доп доходов
+    incomeItems = document.querySelectorAll('.income-items');
+    if (incomeItems.length > 1) {
+      for (let i = (incomeItems.length - 1); i >= 1 ; i--){
+        if (incomeItems[i].parentNode) {
+          incomeItems[i].parentNode.removeChild(incomeItems[i]);
+        }
+      }
+      
+    }
+    btnIncomePlus.style.display = 'block';
+
+    // Возвращаем   значения к началу
     document.querySelectorAll('input').forEach(function(item){
-      item.disabled = false;
       item.value = '';
-      periodSelect.value = 1;
-      periodAmount.textContent = '1';
     });
 
+    periodSelect.value = 1;
+    periodAmount.textContent = '1';
+    //меняем кнопку вновь на Рассчитать 
+    this.turnStartCancel(0);
+    // Разблокировка полей слева
+    this.blockUnBlockInput(0);
   },
 
-  turnStartCancel(){
-    start.style.display = 'none';
-    cancel.style.display = "block";
+  turnStartCancel(n){
+    if (n){
+      start.style.display = 'none';
+      cancel.style.display = "block";
+    } else {
+      start.style.display = "block";
+      cancel.style.display = "none";
+    }
+    
   },
 
-  blockInput(){
-    let divData = document.querySelector('.data');
-    divData.querySelectorAll('input[type=text]').forEach(function(item){
-      item.disabled = true;
-    });
+  getAllElementsWithAttribute(context, attribute)
+  {
+    let matchingElements = [];
+    const allElements = context.getElementsByTagName('*');
+    for (let i = 0; i < allElements.length; i++)
+    {
+      if (allElements[i].getAttribute(attribute) !== undefined)
+      {
+        // Element exists with attribute. Add to array.
+        matchingElements.push(allElements[i]);
+      }
+    }
+    //debugger;
+    //const allElements = context.querySelectorAll('['+ attribute +']');
+    return matchingElements;
   },
+
+  blockUnBlockInput(n){
+    //debugger;
+    // block = 1;
+    // unBlock = 0;
+       const divData = document.querySelector('.data');
+       const arrElemBlock = this.getAllElementsWithAttribute(divData,'disabled');
+       for (let i = 0; i < arrElemBlock.length; i++){
+         arrElemBlock[i].disabled = (n) ? true : false;
+       }
+  },
+
   showResult(){
     budgetMonthValue.value = this.budgetMonth;
     budgetDayValue.value = this.budgetDay;
@@ -107,9 +167,9 @@ let appData = {
     additionalIncomeValue.value = this.addIncome.join(', ');
     targetMonthValue.value = this.getTargetMonth(); 
 
-    periodSelect.addEventListener('change',function(){
+    periodSelect.addEventListener('change',(function(){
       this.getPeriod();
-    });
+    }).bind(appData));
     incomePeriodValue.value = this.calcPeriod();
     
   },
@@ -126,12 +186,15 @@ let appData = {
   //получить все расходы и записать их в объект
   //будем перебирать с помощью forEach все элементы с классом expenses-item
   getExpenses(){
+    const _this=this;
     expensesItems.forEach (function(item){
       //debugger;
+      console.log(_this);
       let itemExpenses = item.querySelector('.expenses-title').value,
           cashExpenses = item.querySelector('.expenses-amount').value;
       if (itemExpenses !== '' && cashExpenses !== ''){
-        appData.expenses[itemExpenses] = cashExpenses;
+        _this.expenses[itemExpenses] = cashExpenses;
+        
       }
     });
   },
@@ -146,34 +209,38 @@ let appData = {
   },
  
   getIncome(){
+    const _this=this;
     incomeItems.forEach (function(item){
+      
       //debugger;
       let itemIncome = item.querySelector('.income-title').value,
           cashIncome = item.querySelector('.income-amount').value;
       if (itemIncome.value !== '' && cashIncome !== ''){
-        appData.income[itemIncome] = cashIncome;
+        _this.income[itemIncome] = cashIncome;
       }
       //debugger;
     });
-    for (let key in appData.income){
-      appData.incomeMonth += +appData.income[key];
+    for (let key in _this.income){
+      _this.incomeMonth += +_this.income[key];
     }
   },
   getAddExpenses(){
     let addExpenses = additionalExpensesItem.value.split(',');
+    const _this = this;
     addExpenses.forEach(function(item){
       item = item.trim();
       if(item !== ''){
-        appData.addExpenses.push(item);
+        _this.addExpenses.push(item);
       }
     });
   },
   //Названия возможных источников дохода
   getAddIncome(){
+    const _this = this;
     additionalIncomeItem.forEach(function(item){
       let itemValue = item.value.trim();
       if(item !== ''){
-        appData.addIncome.push(itemValue);
+        _this.addIncome.push(itemValue);
       }
     });
   },
@@ -234,15 +301,15 @@ let appData = {
 };
 
 //1) ЗАДАНИЕ Привязать контекст вызова функции start к appData 
-salaryAmount.addEventListener('change',function(){
-  start.addEventListener('click', appData.falshStart);
-});
+start.addEventListener('click', appData.start.bind(appData));
 //3) ЗАДАНИЕ Проверить работу кнопок плюс и input-range (исправить если что-то не работает)
 btnIncomePlus.addEventListener('click', appData.addIncomeBlock);
 btnExpensesPlus.addEventListener('click', appData.addExpensesBlock);
 
-periodSelect.addEventListener('change', function(){
+periodSelect.addEventListener('change', (function(){
   appData.getPeriod();
   incomePeriodValue.value = appData.calcPeriod();
-});
-cancel.addEventListener('click', appData.reset);
+}).bind(appData));
+// 4) ЗАДАНИЕ Рассчитать пропадает и появляется кнопка Сбросить, на которую навешиваем событие и выполнение метода reset
+// Метод reset должен всю программу возвращать в исходное состояние
+cancel.addEventListener('click', appData.reset.bind(appData));
