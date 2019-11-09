@@ -1,34 +1,28 @@
 'use strict';
-function one(){
-  console.log('one');
-  two();
-}
-function two(){
-  console.log('two');
-  three();
-}
-function three(){
-  console.log('three');
-}
-one();
-
-
-function test(){
-  console.log('hello', this);
-}
-
-test();
-
-let obj = {
-x: 10,
-y: 20,
-test: newTest
+//lesson10 примеры из урока
+let car = {
+  doors: 4,
+  turbocarging: false,
+  ride: function(){
+    console.log('Машина едет')
+  }
 };
 
-function newTest(){
-  console.log('hello', this);
+let newCar = Object.create(car);
+console.log('newcar', newCar);
 
+
+
+function Car() {
+  this.model = 'Mazda';
 }
-obj.test;
 
-newTest();
+let car1 =  new Car();
+
+
+let carTest = {
+  model: 'Mazda'
+  };
+  
+  console.log(car1);
+  console.log(testCar);
