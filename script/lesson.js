@@ -1,28 +1,33 @@
 'use strict';
 //lesson10 примеры из урока
-let car = {
-  doors: 4,
-  turbocarging: false,
-  ride: function(){
-    console.log('Машина едет')
+
+function Car(countryBuild, options) {
+  this.countryBuild =  countryBuild;
+  options = options || {};
+  this.color = options.color;
+  this.transmisson = options.transmission;
   }
+
+Car.prototype.ride = function() {
+  console.log (this.brand + '  ' + this.model + ' поехала! ')
 };
 
-let newCar = Object.create(car);
-console.log('newcar', newCar);
-
-
-
-function Car() {
-  this.model = 'Mazda';
+function Audi (countryBuild, otptions, model, type) {
+  this.brand = 'Audi';
+  Car.apply(this, arguments);
+  this.model = model;
+  this.type = type;
 }
 
-let car1 =  new Car();
+Audi.prototype = Object.create(Car.prototype);
+Audi.prototype.constructor = Audi;
+let car_q7 = new Audi ('Germany', {color:'red'}, 'q7', 's');
 
+console.log (car_q7);
+console.log (car_q7 instanceof Audi);
+console.log (car_q7 instanceof Car);
 
-let carTest = {
-  model: 'Mazda'
-  };
-  
-  console.log(car1);
-  console.log(testCar);
+car_q7.ride();
+
+console.log(new Object());
+console.log(car_q7 instanceof Object);
