@@ -33,10 +33,7 @@ const start = document.querySelector('#start'),
       incomeItems =  document.querySelectorAll('.income-items'),
       depositCheck = document.getElementById('deposit-check');
 
-// Функция определения числа
-const isNum = function(n){
-  return (!isNaN(parseFloat(n)) && isFinite(n));
-}
+
 
 const  AppData = function() {
   this.budget= 0;
@@ -54,13 +51,20 @@ const  AppData = function() {
   this.addExpenses= [];
 
 };
+
+
+// Функция определения числа
+AppData.prototype.isNum = function(n){
+  return (!isNaN(parseFloat(n)) && isFinite(n));
+};
+
 AppData.prototype.start = function(){
   
     console.log('start',this);
    
     //debugger;
     salaryAmount.value=salaryAmount.value.trim();
-    if (!isNum(salaryAmount.value) || salaryAmount.value === '') {
+    if (!this.isNum(salaryAmount.value) || salaryAmount.value === '') {
       alert ('Введите сумму месячного дохода');
       return;
     }
@@ -294,12 +298,12 @@ AppData.prototype.checkInput =  function(strOrNum,promptMessage,defaultItem){
   if (!!strOrNum) { 
       do {
           checkItem = prompt(promptMessage, defaultItem);
-      } while (!isNum(checkItem));
+      } while (!this.isNum(checkItem));
       return +checkItem;
   } else {
       do {
           checkItem = prompt(promptMessage, defaultItem);
-      } while (isNum(checkItem));
+      } while (this.isNum(checkItem));
       return checkItem;
   }
 };
@@ -317,38 +321,12 @@ AppData.prototype.eventsListeners = function(){
     this.getPeriod();
     incomePeriodValue.value = this.calcPeriod();
   }).bind(appData));
-  
-  
+    
   cancel.addEventListener('click', this.reset.bind(appData));
   
 };
-
-
-/*  
-start.addEventListener('click', appData.start.bind(appData));
-
-btnIncomePlus.addEventListener('click', appData.addIncomeBlock);
-btnExpensesPlus.addEventListener('click', appData.addExpensesBlock);
-
-periodSelect.addEventListener('change', (function(){
-  appData.getPeriod();
-  incomePeriodValue.value = appData.calcPeriod();
-}).bind(appData));
-
-
-cancel.addEventListener('click', appData.reset.bind(appData));
-*/
-
-
-
-
-
-
-
 
 const appData = new AppData(); 
 appData.eventsListeners();
 
 console.log(appData);
-
-
