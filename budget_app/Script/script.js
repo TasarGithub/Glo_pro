@@ -143,7 +143,8 @@ AppData.prototype.getAllElementsWithAttribute = function(context, attribute){
   let matchingElements = [];
   const allElements = context.getElementsByTagName('*');
   for (let i = 0; i < allElements.length; i++){
-    if (allElements[i].getAttribute(attribute) !== undefined){
+    //if (allElements[i].getAttribute(attribute) !== undefined){
+    if (allElements[i].disabled !== undefined){
       // Element exists with attribute. Add to array.
       matchingElements.push(allElements[i]);
     }
@@ -158,7 +159,7 @@ AppData.prototype.blockUnBlockInput = function(n){
   // block = 1;
   // unBlock = 0;
      const divData = document.querySelector('.data');
-     const arrElemBlock = this.getAllElementsWithAttribute(divData,'disabled');
+     const arrElemBlock = divData.getElementsByTagName('*');  //this.getAllElementsWithAttribute(divData,'disabled');
      for (let i = 0; i < arrElemBlock.length; i++){
        if (arrElemBlock[i].type !== 'range'){
         //console.log('arrElemBlock[' + i + ']', arrElemBlock[i].attributes );
@@ -199,7 +200,7 @@ AppData.prototype.getExpenses = function(){
   const _this=this;
   expensesItems.forEach (function(item){
     //debugger;
-    console.log(_this);
+    //console.log(_this);
     let itemExpenses = item.querySelector('.expenses-title').value,
         cashExpenses = item.querySelector('.expenses-amount').value;
     if (itemExpenses !== '' && cashExpenses !== ''){
@@ -257,7 +258,7 @@ AppData.prototype.getAddIncome = function(){
 
 AppData.prototype.getPeriod = function(){
   this.period = document.querySelector('.period-select').value;
-  console.log('this.period: ', this);
+  //console.log('this.period: ', this);
   periodAmount.textContent = this.period;
 };
 
@@ -312,7 +313,7 @@ AppData.prototype.checkInput =  function(strOrNum,promptMessage,defaultItem){
 
 
 AppData.prototype.eventsListeners = function(){
-  console.log(this);
+  //console.log(this);
   start.addEventListener('click', this.start.bind(this));
 
   btnIncomePlus.addEventListener('click', this.addIncomeBlock);
