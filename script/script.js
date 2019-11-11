@@ -54,6 +54,6 @@ function DomElement(selector, height, width, bg, fontSize) {
   };
 }
 
-let myElement = new DomElement('.myClass', 100, 20, 'red', 25 );
+//let myElement = new DomElement('.myClass', 100, 20, 'red', 25 );
 let myElement = new DomElement('#myId', 100, 20, 'red', 25 );
 myElement.creatElem();

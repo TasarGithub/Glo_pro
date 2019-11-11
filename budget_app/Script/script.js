@@ -97,7 +97,7 @@ AppData.prototype.start = function(){
     
   }
   // возврат кнопки +
-  btnExpensesPlus.style.display = 'block';
+  btnExpensesPlus.hidden = false;
 
 // удаление  новых полей доп доходов
   incomeItems = document.querySelectorAll('.income-items');
@@ -110,7 +110,7 @@ AppData.prototype.start = function(){
     
   }
    // возврат кнопки +
-  btnIncomePlus.style.display = 'block';
+  btnIncomePlus.hidden = false;
 
   // Возвращаем   значения к началу
   document.querySelectorAll('input').forEach(function(item){
@@ -130,10 +130,10 @@ AppData.prototype.start = function(){
 
 AppData.prototype.turnStartCancel = function(n){
   if (n){
-    start.style.display = 'none';
+    start.hidden = true;
     cancel.style.display = "block";
   } else {
-    start.style.display = "block";
+    start.hidden = false;
     cancel.style.display = "none";
   }
   
@@ -189,7 +189,7 @@ AppData.prototype.addExpensesBlock = function(){
   expensesItems[0].parentNode.insertBefore(cloneExpensesItem,btnExpensesPlus);
   expensesItems = document.querySelectorAll('.expenses-items');
   if (expensesItems.length === 3) {
-    btnExpensesPlus.style.display = 'none';
+    btnExpensesPlus.hidden = true;
   }
 };
 
@@ -214,7 +214,7 @@ AppData.prototype.addIncomeBlock = function(){
   incomeItems[0].parentNode.insertBefore(cloneIncomeItem,btnIncomePlus);
   incomeItems = document.querySelectorAll('.income-items');
   if (incomeItems.length === 3) {
-    btnIncomePlus.style.display = 'none';
+    btnIncomePlus.hidden = true;
   }
 };
 
