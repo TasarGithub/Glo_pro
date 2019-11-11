@@ -139,14 +139,11 @@ AppData.prototype.turnStartCancel = function(n){
   
 };
 
-AppData.prototype.getAllElementsWithAttribute = function(context, attribute)
-{
+AppData.prototype.getAllElementsWithAttribute = function(context, attribute){
   let matchingElements = [];
   const allElements = context.getElementsByTagName('*');
-  for (let i = 0; i < allElements.length; i++)
-  {
-    if (allElements[i].getAttribute(attribute) !== undefined)
-    {
+  for (let i = 0; i < allElements.length; i++){
+    if (allElements[i].getAttribute(attribute) !== undefined){
       // Element exists with attribute. Add to array.
       matchingElements.push(allElements[i]);
     }
@@ -163,7 +160,11 @@ AppData.prototype.blockUnBlockInput = function(n){
      const divData = document.querySelector('.data');
      const arrElemBlock = this.getAllElementsWithAttribute(divData,'disabled');
      for (let i = 0; i < arrElemBlock.length; i++){
-       arrElemBlock[i].disabled = !!(n);
+       if (arrElemBlock[i].type !== 'range'){
+        //console.log('arrElemBlock[' + i + ']', arrElemBlock[i].attributes );
+        //console.log('arrElemBlock[' + i + ']', arrElemBlock[i] );
+        arrElemBlock[i].disabled = !!(n);
+       }
      }
 };
 
@@ -230,7 +231,7 @@ AppData.prototype.getIncome = function(){
     //debugger;
   });
   for (let key in _this.income){
-    _this.incomeMonth += +_this.income[key];
+    this.incomeMonth += +this.income[key];
   }
 };
 AppData.prototype.getAddExpenses = function(){
@@ -312,7 +313,7 @@ AppData.prototype.checkInput =  function(strOrNum,promptMessage,defaultItem){
 
 AppData.prototype.eventsListeners = function(){
   console.log(this);
-  start.addEventListener('click', this.start.bind(appData));
+  start.addEventListener('click', this.start.bind(this));
 
   btnIncomePlus.addEventListener('click', this.addIncomeBlock);
   btnExpensesPlus.addEventListener('click', this.addExpensesBlock);
@@ -320,13 +321,13 @@ AppData.prototype.eventsListeners = function(){
   periodSelect.addEventListener('change', (function(){
     this.getPeriod();
     incomePeriodValue.value = this.calcPeriod();
-  }).bind(appData));
+  }).bind(this));
     
-  cancel.addEventListener('click', this.reset.bind(appData));
+  cancel.addEventListener('click', this.reset.bind(this));
   
 };
 
-const appData = new AppData(); 
-appData.eventsListeners();
+const newData = new AppData(); 
+newData.eventsListeners();
 
-console.log(appData);
+console.log('newData', newData);
