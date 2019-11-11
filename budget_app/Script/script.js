@@ -139,27 +139,12 @@ AppData.prototype.turnStartCancel = function(n){
   
 };
 
-AppData.prototype.getAllElementsWithAttribute = function(context, attribute){
-  let matchingElements = [];
-  const allElements = context.getElementsByTagName('*');
-  for (let i = 0; i < allElements.length; i++){
-    //if (allElements[i].getAttribute(attribute) !== undefined){
-    if (allElements[i].disabled !== undefined){
-      // Element exists with attribute. Add to array.
-      matchingElements.push(allElements[i]);
-    }
-  }
-  //debugger;
-  //const allElements = context.querySelectorAll('['+ attribute +']');
-  return matchingElements;
-};
-
 AppData.prototype.blockUnBlockInput = function(n){
   //debugger;
   // block = 1;
   // unBlock = 0;
      const divData = document.querySelector('.data');
-     const arrElemBlock = divData.getElementsByTagName('*');  //this.getAllElementsWithAttribute(divData,'disabled');
+     const arrElemBlock = divData.getElementsByTagName('*');  
      for (let i = 0; i < arrElemBlock.length; i++){
        if (arrElemBlock[i].type !== 'range'){
         //console.log('arrElemBlock[' + i + ']', arrElemBlock[i].attributes );
