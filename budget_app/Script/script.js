@@ -164,6 +164,7 @@ AppData.prototype.blockUnBlockInput = function(n){
 };
 
 AppData.prototype.showResult = function(){
+  const _this = this;
   budgetMonthValue.value = this.budgetMonth;
   budgetDayValue.value = this.budgetDay;
   expensesMonthValue.value = this.expensesMonth;
@@ -173,7 +174,7 @@ AppData.prototype.showResult = function(){
 
   periodSelect.addEventListener('change',(function(){
     this.getPeriod();
-  }).bind(appData));
+  }).bind(_this));
   incomePeriodValue.value = this.calcPeriod();
   
 };
@@ -305,19 +306,25 @@ AppData.prototype.checkInput =  function(strOrNum,promptMessage,defaultItem){
 
 
 
+AppData.prototype.eventsListeners = function(){
+  console.log(this);
+  start.addEventListener('click', this.start.bind(appData));
+
+  btnIncomePlus.addEventListener('click', this.addIncomeBlock);
+  btnExpensesPlus.addEventListener('click', this.addExpensesBlock);
+  
+  periodSelect.addEventListener('change', (function(){
+    this.getPeriod();
+    incomePeriodValue.value = this.calcPeriod();
+  }).bind(appData));
+  
+  
+  cancel.addEventListener('click', this.reset.bind(appData));
+  
+};
 
 
-
-
-
-
-
-
-const appData = new AppData(); 
-
-console.log(appData);
-
-
+/*  
 start.addEventListener('click', appData.start.bind(appData));
 
 btnIncomePlus.addEventListener('click', appData.addIncomeBlock);
@@ -330,3 +337,18 @@ periodSelect.addEventListener('change', (function(){
 
 
 cancel.addEventListener('click', appData.reset.bind(appData));
+*/
+
+
+
+
+
+
+
+
+const appData = new AppData(); 
+appData.eventsListeners();
+
+console.log(appData);
+
+
