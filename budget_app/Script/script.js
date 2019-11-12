@@ -35,6 +35,7 @@ const start = document.querySelector('#start'),
 
 
 
+
 const  AppData = function() {
   this.budget= 0;
   this.budgetDay= 0;
@@ -74,6 +75,8 @@ AppData.prototype.start = function(){
     this.getExpensesMonth();  
     this.getAddExpenses();
     this.getAddIncome();
+    //debugger;
+    this.getInfoDeposit();
     this.getBudget();
     this.getTargetMonth();
     
@@ -256,10 +259,10 @@ AppData.prototype.getExpensesMonth = function(){
   }
 };
 AppData.prototype.getBudget = function(){
-  this.budgetMonth = this.budget + +this.incomeMonth - this.expensesMonth;
+  this.budgetMonth = Math.floor(this.budget + +this.incomeMonth - this.expensesMonth + (this.moneyDeposit * this.percentDeposit)/12);
   this.budgetDay = Math.floor(this.budgetMonth / 30);
 };
-AppData.prototype.getTargetMonth = function(){
+AppData.prototype.getTargetMonth = function(){  
   return Math.ceil(targetAmount.value / this.budgetMonth);
 };
 AppData.prototype.getStatusIncome = function(){
@@ -274,9 +277,10 @@ AppData.prototype.getStatusIncome = function(){
   }
 };
 AppData.prototype.getInfoDeposit =  function(){
+  //debugger;
   if (this.deposit) {
-    this.percentDeposit = this.checkInput(1, 'Какой годовой процент?', 10);
-    this.moneyDeposit = this.checkInput(1, 'Какая сумма на депозите?', 10000);
+    this.percentDeposit = (this.isNum(depositPercent.value)) ? depositPercent.value : alert('введите число в проценты');
+    this.moneyDeposit = (this.isNum(depositAmount.value)) ? depositAmount.value : alert('введите число в сумму депозита');
   }        
 };
 AppData.prototype.calcPeriod =  function(){
@@ -310,6 +314,33 @@ AppData.prototype.eventsListeners = function(){
   periodSelect.addEventListener('change', (function(){
     this.getPeriod();
     incomePeriodValue.value = this.calcPeriod();
+  }).bind(this));
+
+  depositCheck.addEventListener('change', (function () {
+      if (depositCheck.checked){
+        depositBank.style.display = 'inline-block';
+        depositAmount.style.display = 'inline-block';
+        this.deposit = true;
+        depositBank.addEventListener('change', function () {
+          let selectindex = this.options[this.selectedIndex].value;
+          if (selectindex === 'other'){
+            depositPercent.style.display = 'inline-block';
+            depositPercent.disabled = false;
+            depositPercent.value = '';
+          }else{
+            depositPercent.style.display = 'none';
+            depositPercent.value = selectindex;            
+          }
+
+          
+      
+      });
+      }else{
+        depositBank.style.display = 'none';
+        depositAmount.style.display = 'none';
+        depositAmount.value = '';
+        this.deposit = false;
+      }
   }).bind(this));
     
   cancel.addEventListener('click', this.reset.bind(this));
