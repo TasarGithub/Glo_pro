@@ -279,8 +279,8 @@ AppData.prototype.getStatusIncome = function(){
 AppData.prototype.getInfoDeposit =  function(){
   //debugger;
   if (this.deposit) {
-    this.percentDeposit = (this.isNum(depositPercent.value)) ? depositPercent.value : alert('введите число в проценты');
-    this.moneyDeposit = (this.isNum(depositAmount.value)) ? depositAmount.value : alert('введите число в сумму депозита');
+    this.percentDeposit =  depositPercent.value;
+    this.moneyDeposit = depositAmount.value;
   }        
 };
 AppData.prototype.calcPeriod =  function(){
