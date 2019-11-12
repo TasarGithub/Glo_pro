@@ -121,6 +121,9 @@ AppData.prototype.start = function(){
   periodAmount.textContent = '1';
   //debugger;
   depositCheck.checked = false;
+  //обнуление массивов доп расходов и доп доходов
+  this.addIncome = [];
+  this.addExpenses = [];
 
   //меняем кнопку вновь на Рассчитать 
   this.turnStartCancel(0);
@@ -211,7 +214,7 @@ AppData.prototype.getIncome = function(){
     //debugger;
     let itemIncome = item.querySelector('.income-title').value,
         cashIncome = item.querySelector('.income-amount').value;
-    if (itemIncome.value !== '' && cashIncome !== ''){
+    if (itemIncome !== '' && cashIncome !== ''){
       _this.income[itemIncome] = cashIncome;
     }
     //debugger;
@@ -224,9 +227,9 @@ AppData.prototype.getAddExpenses = function(){
   let addExpenses = additionalExpensesItem.value.split(',');
   const _this = this;
   addExpenses.forEach(function(item){
-    item = item.trim();
-    if(item !== ''){
-      _this.addExpenses.push(item);
+    let itemValue = item.trim();
+    if(itemValue !== ''){
+      _this.addExpenses.push(itemValue);
     }
   });
 };
@@ -235,7 +238,7 @@ AppData.prototype.getAddIncome = function(){
   const _this = this;
   additionalIncomeItem.forEach(function(item){
     let itemValue = item.value.trim();
-    if(item !== ''){
+    if(itemValue !== ''){
       _this.addIncome.push(itemValue);
     }
   });
@@ -282,7 +285,7 @@ AppData.prototype.calcPeriod =  function(){
 AppData.prototype.checkInput =  function(strOrNum,promptMessage,defaultItem){
   let checkItem;
   // strOrNum:  false - str, true - Num
-  if (!!strOrNum) { 
+  if (strOrNum) { 
       do {
           checkItem = prompt(promptMessage, defaultItem);
       } while (!this.isNum(checkItem));
