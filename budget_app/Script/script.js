@@ -49,7 +49,7 @@ const  AppData = function() {
   this.deposit= false;
   this.percentDeposit= 0;
   this.moneyDeposit= 0;
-  this.addExpenses= [];
+
 
 };
 
@@ -90,34 +90,36 @@ AppData.prototype.start = function(){
 
 
   AppData.prototype.reset = function(){
-    //debugger;
+  //  debugger;
     // удаление  новых полей доп расходов
-  expensesItems = document.querySelectorAll('.expenses-items');
+
   if (expensesItems.length > 1) {
-    for (let i = (expensesItems.length - 1); i >= 1 ; i--){
+    for (let i = (expensesItems.length - 1); i > 0 ; i--){
       if (expensesItems[i].parentNode) {
         expensesItems[i].parentNode.removeChild(expensesItems[i]);
       }
     }
-    
   }
+  expensesItems = document.querySelectorAll('.expenses-items');
+
   // возврат кнопки +
   btnExpensesPlus.hidden = false;
 
 // удаление  новых полей доп доходов
-  incomeItems = document.querySelectorAll('.income-items');
+
   if (incomeItems.length > 1) {
-    for (let i = (incomeItems.length - 1); i >= 1 ; i--){
+    for (let i = (incomeItems.length - 1); i > 0 ; i--){
       if (incomeItems[i].parentNode) {
         incomeItems[i].parentNode.removeChild(incomeItems[i]);
       }
     }
-    
   }
+  incomeItems = document.querySelectorAll('.income-items');
+
    // возврат кнопки +
   btnIncomePlus.hidden = false;
 
-  // Возвращаем   значения к началу
+  // Возвращаем значения к началу
   document.querySelectorAll('input').forEach(function(item){
     item.value = '';
   });
@@ -126,9 +128,21 @@ AppData.prototype.start = function(){
   periodAmount.textContent = '1';
   //debugger;
   depositCheck.checked = false;
-  //обнуление массивов доп расходов и доп доходов
-  this.addIncome = [];
-  this.addExpenses = [];
+  //обнуление всех данных
+  this.budget= 0;
+  this.budgetDay= 0;
+  this.budgetMonth= 0;
+  this.income= {};
+  this.expenses= {};
+  this.incomeMonth= 0;
+  this.addIncome= [];
+  this.expensesMonth= 0;
+  this.addExpenses= [];
+  this.deposit= false;
+  this.percentDeposit= 0;
+  this.moneyDeposit= 0;
+
+
 
   //меняем кнопку вновь на Рассчитать 
   this.turnStartCancel(0);
@@ -217,13 +231,11 @@ AppData.prototype.addIncomeBlock = function(){
   }
 };
 
-//получить все расходы и записать их в объект
-//будем перебирать с помощью forEach все элементы с классом expenses-item
+
 AppData.prototype.getInExp = function(){
-  // для обнуления массива перед переприсваиванием после повтороного запуска расчитать после копки собросить
-  //this.income= {};
-  //this.expenses= {};
-  //ebugger;
+  // для обнуления накопленных данных перед присваиванием после повтороного запуска расчитать после копки собросить
+
+  //debugger;
   const _this=this;
   const  count = item  => {
     const strInExp =  item.className.split('-')[0],
