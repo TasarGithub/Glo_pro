@@ -59,7 +59,7 @@ AppData.prototype.isNum = n => !isNaN(parseFloat(n)) && isFinite(n);
 
 AppData.prototype.start = function(){
   
-    console.log('start',this);
+    //console.log('start',this);
    
     //debugger;
     salaryAmount.value=salaryAmount.value.trim();
@@ -69,19 +69,12 @@ AppData.prototype.start = function(){
     }
     this.budget = +salaryAmount.value;
     this.getInExp();
-    // this.getIncome();
-    // this.getExpenses();
     this.getExpensesMonth();  
     this.getAdd();
-    //this.getAddExpenses();
-    //this.getAddIncome();
-    //debugger;
     this.getInfoDeposit();
     this.getBudget();
     this.getTargetMonth();
-    
     this.showResult();
-    
     this.turnStartCancel(1);
     this.blockUnBlockInput(1); 
   };
@@ -141,6 +134,14 @@ AppData.prototype.start = function(){
   this.moneyDeposit= 0;
 
 
+  depositBank.style.display = 'none';
+  depositAmount.style.display = 'none';
+  depositPercent.value = '';
+  depositPercent.style.display = 'none';
+  depositAmount.value = '';
+  
+
+
 
   //меняем кнопку вновь на Рассчитать 
   this.turnStartCancel(0);
@@ -148,7 +149,7 @@ AppData.prototype.start = function(){
   this.blockUnBlockInput(0);
 };
 
-AppData.prototype.turnStartCancel = function(n){
+AppData.prototype.turnStartCancel = (n) => {
   if (n){
     start.hidden = true;
     cancel.style.display = "block";
@@ -159,16 +160,13 @@ AppData.prototype.turnStartCancel = function(n){
   
 };
 
-AppData.prototype.blockUnBlockInput = function(n){
-  //debugger;
+AppData.prototype.blockUnBlockInput = (n) => {
   // block = 1;
   // unBlock = 0;
      const divData = document.querySelector('.data');
      const arrElemBlock = divData.getElementsByTagName('*');  
      for (let i = 0; i < arrElemBlock.length; i++){
        if (arrElemBlock[i].type !== 'range'){
-        //console.log('arrElemBlock[' + i + ']', arrElemBlock[i].attributes );
-        //console.log('arrElemBlock[' + i + ']', arrElemBlock[i] );
         arrElemBlock[i].disabled = !!(n);
        }
      }
@@ -189,8 +187,8 @@ AppData.prototype.showResult = function(){
   incomePeriodValue.value = this.calcPeriod();
   
 };
-// добавление блоков расходов и доходов
 
+// добавление блоков расходов и доходов
 AppData.prototype.addBlock = function(){
   console.log ('this.className', this.className);
   if (this.className === 'btn_plus expenses_add'){
@@ -233,14 +231,16 @@ AppData.prototype.getInExp = function(){
   }
 
 };
- 
+
+//Названия возможных расходов и доходов 
 AppData.prototype.getAdd = function(){
-  //Названия возможных расходов и доходов
   //debugger;
   let addExpenses = additionalExpensesItem.value.split(',');
   addExpenses.splice(0,0,'addExpenses');
 
-  const addIncomeArr = Array.prototype.map.call(additionalIncomeItem,el =>el.value );
+  //const addIncomeArr = Array.prototype.map.call(additionalIncomeItem,el =>el.value );  1ый метод
+  const addIncomeArr = Array.from(additionalIncomeItem, (item) => item.value); //2ой метод, лаконичнее
+
   addIncomeArr.splice(0,0,'addIncome');
   
    let count = (item,ind,arr) => {
@@ -341,6 +341,8 @@ AppData.prototype.eventsListeners = function(){
       }else{
         depositBank.style.display = 'none';
         depositAmount.style.display = 'none';
+        depositPercent.value = '';
+        depositPercent.style.display = 'none';
         depositAmount.value = '';
         this.deposit = false;
       }
