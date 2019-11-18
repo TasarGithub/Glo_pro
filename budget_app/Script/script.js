@@ -48,6 +48,8 @@ class AppData {
     this.moneyDeposit = 0;
   }
   
+  isNum = (n) => !isNaN(parseFloat(n)) && isFinite(n);
+
   start() {
   
     //debugger;
