@@ -2,15 +2,15 @@ window.addEventListener('DOMContentLoaded', function () {
   'use strict';
 
   // таймер
-  let countTimer = (deadLine) => {
+  const countTimer = (deadLine) => {
     //debugger;
-    let timerdays= document.querySelector('#timer-days'),
+    const timerdays= document.querySelector('#timer-days'),
         timerhours= document.querySelector('#timer-hours'),
         timerminutes = document.querySelector('#timer-minutes'),
         timerseconds = document.querySelector('#timer-seconds');
 
     let getTimeRemanining = () => {
-      let dateStop = new Date(deadLine).getTime(),
+      const dateStop = new Date(deadLine).getTime(),
         dateNow = new Date().getTime(),
         timeRemaning = (dateStop -dateNow) / 1000,
         seconds = Math.floor(timeRemaning % 60),
@@ -20,8 +20,8 @@ window.addEventListener('DOMContentLoaded', function () {
       return {timeRemaning, days, hours, minutes, seconds};
         
     }
-    let updateClock = () => {
-      let timer = getTimeRemanining();
+    const updateClock = () => {
+      const timer = getTimeRemanining();
      
       timerhours.textContent = (timer.hours < 10) ? ('0' + timer.hours) : timer.hours;
       timerminutes.textContent = (timer.minutes < 10) ? ('0' + timer.minutes) : timer.minutes;
@@ -31,14 +31,12 @@ window.addEventListener('DOMContentLoaded', function () {
       console.log('timer.timeRemaning: ', timer.timeRemaning);
     }
     
-    let timer = getTimeRemanining();
+    const  timer = getTimeRemanining();
     if (timer.timeRemaning > 0) {
-      console.log('timer.timeRemaning: ', timer.timeRemaning);
-      console.log('timer.timeRemaning - 873700: ', (timer.timeRemaning - 873600)*1000);
-      let idTimer = setInterval(updateClock, 1000);
+       const idTimer = setInterval(updateClock, 1000);
       setTimeout( () => {
         clearTimeout(idTimer);
-      }, ((timer.timeRemaning - 867000)*1000));
+      }, ((timer.timeRemaning) * 1000));
     } else {
       timerhours.textContent = '00';
       timerminutes.textContent = '00';
@@ -47,10 +45,6 @@ window.addEventListener('DOMContentLoaded', function () {
     }
   }
     
-
-  //setInterval(countTimer , 1000, '1 december 2019');
-  //console.log(timeRemaning);
-  
-  countTimer('1 december 2019');
+countTimer('1 december 2019');
 
 });
