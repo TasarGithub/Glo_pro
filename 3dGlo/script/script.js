@@ -9,7 +9,7 @@ window.addEventListener('DOMContentLoaded', function () {
         timerminutes = document.querySelector('#timer-minutes'),
         timerseconds = document.querySelector('#timer-seconds');
 
-    let getTimeRemanining = () => {
+    const getTimeRemanining = () => {
       const dateStop = new Date(deadLine).getTime(),
         dateNow = new Date().getTime(),
         timeRemaning = (dateStop -dateNow) / 1000,
@@ -31,7 +31,7 @@ window.addEventListener('DOMContentLoaded', function () {
       console.log('timer.timeRemaning: ', timer.timeRemaning);
     }
     
-    const  timer = getTimeRemanining();
+    const timer = getTimeRemanining();
     if (timer.timeRemaning > 0) {
        const idTimer = setInterval(updateClock, 1000);
       setTimeout( () => {
