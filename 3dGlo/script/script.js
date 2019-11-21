@@ -28,7 +28,6 @@ window.addEventListener('DOMContentLoaded', function () {
       timerseconds.textContent = (timer.seconds < 10) ? ('0' + timer.seconds) : timer.seconds; 
       timerdays.textContent = (timer.days < 10) ? ('0' + timer.days) : timer.days;
       
-      console.log('timer.timeRemaning: ', timer.timeRemaning);
     }
     
     const timer = getTimeRemanining();
@@ -46,5 +45,27 @@ window.addEventListener('DOMContentLoaded', function () {
   }
     
 countTimer('1 december 2019');
-
+  //menu
+  const toggleMenu = () =>{
+    const btnMenu =  document.querySelector('.menu'),
+      menu =  document.querySelector('menu'),
+      closeBtn = document.querySelector('.close-btn'),
+      menuItems = document.querySelectorAll('ul>li');
+       //закрытие/открытие меню 
+      const handlerMenu = () => {
+        if (!menu.style.transform || menu.style.transform === `translate(-100%)`) {
+          menu.style.transform = `translate(0)`; // появление меню
+        } else {
+          menu.style.transform = `translate(-100%)`; // убираем меню  
+        }
+      }
+    
+  btnMenu.addEventListener('click', handlerMenu);
+    
+  closeBtn.addEventListener('click', handlerMenu);
+  
+  // закрытие при нажатии на какой-либо пункт меню
+  menuItems.forEach( (elem) => elem.addEventListener('click',handlerMenu));
+  }
+  toggleMenu();
 });
