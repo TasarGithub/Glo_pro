@@ -31,7 +31,7 @@ window.addEventListener('DOMContentLoaded', function () {
       console.log('timer.timeRemaning: ', timer.timeRemaning);
     }
     
-    const  timer = getTimeRemanining();
+    const timer = getTimeRemanining();
     if (timer.timeRemaning > 0) {
        const idTimer = setInterval(updateClock, 1000);
       setTimeout( () => {
