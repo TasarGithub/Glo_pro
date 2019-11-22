@@ -13,9 +13,9 @@ window.addEventListener('DOMContentLoaded', function () {
 
   const getTimeRemanining = (deadLine) => {
     const dateStop = new Date(deadLine).getTime(),
-      dateNow = new Date().getTime(),
-      timeRemaning = (dateStop -dateNow) / 1000,
       date = new Date(),
+      dateNow = date.getTime(),
+      timeRemaning = (dateStop -dateNow) / 1000,
       seconds = date.getSeconds(),
       minutes =  date.getMinutes(),
       hours = date.getHours(),
@@ -25,38 +25,8 @@ window.addEventListener('DOMContentLoaded', function () {
       
   }
 
-  const wd = (d) => {
-    switch (d) {
-      case 0: {
-        return 'Воскресенье';
-        break;
-      }
-      case 1: {
-        return 'Понедельник';
-        break;
-      }
-      case 2: {
-        return 'Вторник';
-        break;
-      }
-      case 3: {
-        return 'Среда';
-        break;
-      }
-      case 4: {
-        return 'Четверг';
-        break;
-      }
-      case 5: {
-        return 'Пятница';
-        break;
-      }
-      case 6: {
-        return 'Суббота';
-        break;
-      }
-    }
-  } 
+  const wd = ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота' ]
+
 
   const countTimer = (deadLine) => {
     const GoodDay = document.createElement('p'),
@@ -65,10 +35,12 @@ window.addEventListener('DOMContentLoaded', function () {
       timeUntil = document.createElement('p'),
       timer = getTimeRemanining(deadLine);
       
-    GoodDay.textContent = (timer.hours > 6 && timer.hours < 12) ? 'Доброе утро' :
-                          ((timer.hours > 12 &&  timer.hours < 19 ) ? 'Добрый день' :
-                          ((timer.hours > 19 &&  timer.hours < 24 ) ? 'Добрый вечер' : 'Добрая ночь'));
-    today.textContent = wd(timer.daysOfWeek);
+    GoodDay.textContent = (timer.hours >= 6 && timer.hours < 12) ? 'Доброе утро' :
+                          ((timer.hours >= 12 &&  timer.hours < 19 ) ? 'Добрый день' :
+                          ((timer.hours >= 19 &&  timer.hours < 24 ) ? 'Добрый вечер' : 'Добрая ночь'));
+    console.log('timer.hours: ', timer.hours);
+
+    today.textContent = wd[timer.daysOfWeek];
     timeNow.textContent = `Текущее время : ${(timer.hours > 12) ? zeroPlus(timer.hours-12) :
                           zeroPlus(timer.hours)}:${zeroPlus(timer.minutes)}:${zeroPlus(timer.seconds)} ${(timer.hours > 12) ? 'PM' : 'AM'}`;
     timeUntil.textContent = `До нового года осталось ${timer.daysRemainig} дней`;
