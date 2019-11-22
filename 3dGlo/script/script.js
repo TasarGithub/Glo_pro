@@ -43,8 +43,11 @@ window.addEventListener('DOMContentLoaded', function () {
       timerdays.textContent = '00';
     }
   }
-    
-countTimer('1 december 2019');
+
+  countTimer('1 december 2019');
+
+
+
   //menu
   const toggleMenu = () =>{
     const btnMenu =  document.querySelector('.menu'),
@@ -53,11 +56,7 @@ countTimer('1 december 2019');
       menuItems = document.querySelectorAll('ul>li');
        //закрытие/открытие меню 
       const handlerMenu = () => {
-        if (!menu.style.transform || menu.style.transform === `translate(-100%)`) {
-          menu.style.transform = `translate(0)`; // появление меню
-        } else {
-          menu.style.transform = `translate(-100%)`; // убираем меню  
-        }
+        menu.classList.toggle('active-menu')
       }
     
   btnMenu.addEventListener('click', handlerMenu);
@@ -68,4 +67,60 @@ countTimer('1 december 2019');
   menuItems.forEach( (elem) => elem.addEventListener('click',handlerMenu));
   }
   toggleMenu();
+
+  //popup
+  const togglePopUp = () => {
+    const popup = document.querySelector('.popup'),
+          popupContent = document.querySelector('.popup-content'),
+    // кнопки запуска модальных окон
+      popupBtn = document.querySelectorAll('.popup-btn'),
+      popUpClose = document.querySelector('.popup-close');
+    popupBtn.forEach((elem) => {
+      elem.addEventListener('click', () => {
+        popup.style.display = 'block';
+        popupContent.style.position = 'relative';
+       flyInterval = requestAnimationFrame(flyAnimate);
+      });
+    });
+
+    popUpClose.addEventListener('click', () => {
+      popup.style.display = 'none';
+      popupContent.style.position = 'fixed';
+      cancelAnimationFrame(flyInterval);
+    });
+
+    //anime
+    let flyInterval,
+    count = 1;
+
+    let flyAnimate = () => {
+      //debugger;
+      flyInterval = requestAnimationFrame(flyAnimate);
+      count++;
+
+      //document.documentElement.clientWidth
+      //console.log('document.documentElement.clientWidth: ', document.documentElement.clientWidth);
+
+      if(screen.width > 768){
+        if(count < (document.documentElement.clientWidth - popupContent.offsetWidth)&&
+          (count < (document.documentElement.clientHeight - popupContent.offsetHeight))){
+            popupContent.style.left = count + 'px';
+            popupContent.style.top = count + 'px';
+        } else if (count < (document.documentElement.clientHeight - popupContent.offsetHeight)){
+          
+          popupContent.style.top = count + 'px';
+        } else if (count < (document.documentElement.clientWidth - popupContent.offsetWidth)) {
+          popupContent.style.left = count + 'px';
+        } else {
+          cancelAnimationFrame(flyInterval);
+        }
+      } else {
+        cancelAnimationFrame(flyInterval);
+      }
+    };
+    
+  };
+
+  togglePopUp();
+
 });
