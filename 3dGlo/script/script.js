@@ -122,5 +122,11 @@ window.addEventListener('DOMContentLoaded', function () {
   };
 
   togglePopUp();
+// tabs
 
+const tabs = () =>{
+  const tabHeader = document.querySelectorAll('.service-header'),
+  tab = document.querySelector('.service-header-tab'),
+  tabContenet = document.querySelector('.service-tab');
+}
 });
