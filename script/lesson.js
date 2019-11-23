@@ -1,65 +1,24 @@
 'use strict';
-//lesson11.2
+//lesson14
 
-class CarWash {
-  constructor(brand, model = noCarBaseModel(), services = []){
-    this.brand = brand;
-    this.model = model;
-    this.washed = false;
-    this.services = services;
+const buttons = document.querySelectorAll('.button');
+content = document.querySelector('.content');
 
-  }
-  washReady() {
-    this.washed = true;
-    CarWash.counter++;
-    this.report();
-  }
-  static noCarBaseModel(){
-     return 'none';
-  }
+wrapButtons = document.querySelector
 
-  report() {
-    console.log(this.brand, this.model, this.washed);
-  }
-
-  get services(){
-  
-  }
-}
-CarWash.counter = 0;
-
-const car1 = new CarWash('mazda', 3, ['black tires', 'wax']);
-const car2 = new CarWash('BMW', 6);
-const car3 = new CarWash('Mers', A200);
-const car4 = new CarWash('Zaz');
-
-car1.washReady();
-car2.washReady();
-car3.washReady();
-car4.washReady();
-
-console.log('CarWash.counter: ', CarWash.counter);
-
-
-
-
-const car = {
-  model: '3',
-  year: 2006
-  brand: mazda
-  get fullTitle(){
-    return this.brand + ' ' + this.model;
-  }
-  set function(value) {
-    this.brand = value;
-  }
+const changeText = (element) => {
+  content.textContent = element.textContent;
 };
 
-Object.defineProperty (mazda, 'fullTitle', {
-  get: function() {
-    return this.brand + ' ' + this.model;
-  },
-  set: function(val) {
-    this.brand = val
+for (let i = 0, btnlnt = buttons.length; i < btnlnt; i++) {
+  buttons[i].addEventListener('click', () => changeText(buttons[i]));
+}
+
+function addButton() {
+  const newButton = buttons[0].cloneNode();
+  let textButton = buttons.length + 1;
+  if (textButton < 10) {
+    textButton = `0${textButton}`;
   }
- })
+  wrapButtons.appendChild(newButton);
+}

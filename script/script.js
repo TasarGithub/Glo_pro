@@ -35,6 +35,7 @@ window.addEventListener('DOMContentLoaded', function () {
       timeUntil = document.createElement('p'),
       timer = getTimeRemanining(deadLine);
       
+      
     GoodDay.textContent = (timer.hours >= 6 && timer.hours < 12) ? 'Доброе утро' :
                           ((timer.hours >= 12 &&  timer.hours < 19 ) ? 'Добрый день' :
                           ((timer.hours >= 19 &&  timer.hours < 24 ) ? 'Добрый вечер' : 'Добрая ночь'));

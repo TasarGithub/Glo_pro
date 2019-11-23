@@ -46,8 +46,6 @@ window.addEventListener('DOMContentLoaded', function () {
 
   countTimer('1 december 2019');
 
-
-
   //menu
   const toggleMenu = () =>{
     const btnMenu =  document.querySelector('.menu'),
@@ -122,8 +120,8 @@ window.addEventListener('DOMContentLoaded', function () {
   };
 
   togglePopUp();
-// tabs
 
+  // tabs
 const tabs = () =>{
   const tabHeader = document.querySelectorAll('.service-header'),
   tab = document.querySelector('.service-header-tab'),
