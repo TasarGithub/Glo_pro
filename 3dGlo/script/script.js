@@ -42,89 +42,163 @@ window.addEventListener('DOMContentLoaded', function () {
       timerseconds.textContent = '00'; 
       timerdays.textContent = '00';
     }
-  }
+  };
 
   countTimer('1 december 2019');
 
   //menu
   const toggleMenu = () =>{
+    
     const btnMenu =  document.querySelector('.menu'),
       menu =  document.querySelector('menu'),
       closeBtn = document.querySelector('.close-btn'),
       menuItems = document.querySelectorAll('ul>li');
        //закрытие/открытие меню 
       const handlerMenu = () => {
-        menu.classList.toggle('active-menu')
+        menu.classList.toggle('active-menu');
+      };
+    
+    btnMenu.addEventListener('click', handlerMenu);
+      
+    menu.addEventListener('click', (event) => {
+      let target = event.target;
+      target = target.closest('menu');
+      console.log('target: ', target);
+
+      
+
+      if (target) {
+        handlerMenu();
       }
-    
-  btnMenu.addEventListener('click', handlerMenu);
-    
-  closeBtn.addEventListener('click', handlerMenu);
+
+    });
   
   // закрытие при нажатии на какой-либо пункт меню
-  menuItems.forEach( (elem) => elem.addEventListener('click',handlerMenu));
-  }
+  // menuItems.forEach( (elem) => elem.addEventListener('click',handlerMenu));
+
+  };
+
   toggleMenu();
 
   //popup
   const togglePopUp = () => {
-    const popup = document.querySelector('.popup'),
-          popupContent = document.querySelector('.popup-content'),
+     
+
+    const popUp = document.querySelector('.popup'),
+          popUpContent = document.querySelector('.popup-content'),
     // кнопки запуска модальных окон
-      popupBtn = document.querySelectorAll('.popup-btn'),
-      popUpClose = document.querySelector('.popup-close');
-    popupBtn.forEach((elem) => {
+      popUpBtn = document.querySelectorAll('.popup-btn');
+    let flyInterval,
+      count = 0.01;
+      popUpContent.style.opacity = 0;
+    popUpBtn.forEach((elem) => {
       elem.addEventListener('click', () => {
-        popup.style.display = 'block';
-        popupContent.style.position = 'relative';
+        popUp.style.display = 'block';
+        //popUpContent.style.position = 'relative';
        flyInterval = requestAnimationFrame(flyAnimate);
       });
     });
-
-    popUpClose.addEventListener('click', () => {
-      popup.style.display = 'none';
-      popupContent.style.position = 'fixed';
+    const closePopUp = () => {
+      popUp.style.display = 'none';
+      //popUpContent.style.position = 'fixed';
+      popUpContent.style.opacity = 0;
+      count = 0.01;
       cancelAnimationFrame(flyInterval);
-    });
+    };
+
+    // закрытие мод окна по клику мимо него практика
+    popUp.addEventListener('click', (event) =>{
+      let target = event.target;
+      if (target.classList.contains('popup-close')){
+        closePopUp();
+      } else {
+        target = target.closest('.popup-content');
+        if (!target) {
+          closePopUp();
+        }
+      }
+    });   
 
     //anime
-    let flyInterval,
-    count = 1;
-
+  
     let flyAnimate = () => {
       //debugger;
       flyInterval = requestAnimationFrame(flyAnimate);
-      count++;
+      count=count + 0.01;
 
       //document.documentElement.clientWidth
-      //console.log('document.documentElement.clientWidth: ', document.documentElement.clientWidth);
+      console.dir('document.documentElement: ', document.documentElement);
+      console.dir('popUpContent: ', popUpContent);
+      //debugger;
+      //let opp = popUpContent.style.opacity;
+          if (popUpContent.style.opacity <= 1) {
+              popUpContent.style.opacity = count; 
+          } else {
+            cancelAnimationFrame(flyInterval);
+          }
 
+/*
       if(screen.width > 768){
-        if(count < (document.documentElement.clientWidth - popupContent.offsetWidth)&&
-          (count < (document.documentElement.clientHeight - popupContent.offsetHeight))){
-            popupContent.style.left = count + 'px';
-            popupContent.style.top = count + 'px';
-        } else if (count < (document.documentElement.clientHeight - popupContent.offsetHeight)){
+        if(count < (document.documentElement.clientWidth - popUpContent.offsetWidth)&&
+          (count < (document.documentElement.clientHeight - popUpContent.offsetHeight))){
+            
+            popUpContent.style.left = count + 'px';
+            popUpContent.style.top = count + 'px';
+        } else if (count < (document.documentElement.clientHeight - popUpContent.offsetHeight)){
           
-          popupContent.style.top = count + 'px';
-        } else if (count < (document.documentElement.clientWidth - popupContent.offsetWidth)) {
-          popupContent.style.left = count + 'px';
+          popUpContent.style.top = count + 'px';
+        } else if (count < (document.documentElement.clientWidth - popUpContent.offsetWidth)) {
+          popUpContent.style.left = count + 'px';
         } else {
           cancelAnimationFrame(flyInterval);
         }
       } else {
         cancelAnimationFrame(flyInterval);
-      }
-    };
+      }*/
+    }; 
     
   };
 
   togglePopUp();
 
   // tabs
-const tabs = () =>{
-  const tabHeader = document.querySelectorAll('.service-header'),
-  tab = document.querySelector('.service-header-tab'),
-  tabContenet = document.querySelector('.service-tab');
-}
+  const tabs = () =>{
+    const tabHeader = document.querySelector('.service-header'),
+    tab = tabHeader.querySelectorAll('.service-header-tab'),
+    tabContent = document.querySelectorAll('.service-tab');
+    
+    const toggleTabContent = (index) => {
+      //debugger;
+      for (let i = 0; i < tabContent.length; i++){
+        if (index === i) {
+          tab[i].classList.add('active');
+          tabContent[i].classList.remove('d-none');
+        } else {
+          tab[i].classList.remove('active');
+          tabContent[i].classList.add('d-none');
+        }
+      }
+    };
+    
+    tabHeader.addEventListener('click', (event) => {
+      let target = event.target;
+      target = target.closest('.service-header-tab');
+      
+        if (target){
+          
+          tab.forEach((item,i) => {
+            
+            if(item === target){
+              
+              toggleTabContent(i);
+            }
+
+          });
+
+        }
+      
+    });
+  };
+
+  tabs();
 });
