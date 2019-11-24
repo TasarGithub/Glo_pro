@@ -48,11 +48,8 @@ window.addEventListener('DOMContentLoaded', function () {
 
   //menu
   const toggleMenu = () =>{
-    
     const btnMenu =  document.querySelector('.menu'),
       menu =  document.querySelector('menu'),
-      closeBtn = document.querySelector('.close-btn'),
-      menuItems = document.querySelectorAll('ul>li');
        //закрытие/открытие меню 
       const handlerMenu = () => {
         menu.classList.toggle('active-menu');
@@ -63,9 +60,6 @@ window.addEventListener('DOMContentLoaded', function () {
     menu.addEventListener('click', (event) => {
       let target = event.target;
       target = target.closest('menu');
-      console.log('target: ', target);
-
-      
 
       if (target) {
         handlerMenu();
@@ -73,9 +67,6 @@ window.addEventListener('DOMContentLoaded', function () {
 
     });
   
-  // закрытие при нажатии на какой-либо пункт меню
-  // menuItems.forEach( (elem) => elem.addEventListener('click',handlerMenu));
-
   };
 
   toggleMenu();
