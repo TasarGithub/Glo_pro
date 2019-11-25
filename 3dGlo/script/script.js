@@ -67,6 +67,7 @@ window.addEventListener('DOMContentLoaded', function () {
       handlerMenu = () => {
         menu.classList.toggle('active-menu');
       };
+      
       // обработка клика на открытие меню
      btnMenu.addEventListener('click', (event) => {
       let target =  event.target;
