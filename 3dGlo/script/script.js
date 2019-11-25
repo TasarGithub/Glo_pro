@@ -62,26 +62,21 @@ window.addEventListener('DOMContentLoaded', function () {
       menu =  document.querySelector('menu'),
       menuLi = menu.querySelectorAll('ul>li'),
       closeBtn = document.querySelector('.close-btn'),
-       //закрытие/открытие меню 
+      
+      //фция закрытие/открытие меню 
       handlerMenu = () => {
         menu.classList.toggle('active-menu');
       };
-      
-      console.log('menuLi.attributes: ', menuLi.attributes);
-      console.log('closeBtn.attributes: ', closeBtn.attributes);
-      console.log('closeBtn.className: ', closeBtn.className);
-
+      // обработка клика на открытие меню
      btnMenu.addEventListener('click', (event) => {
       let target =  event.target;
       console.log('target: ', target);
        handlerMenu();
      });
-
+     //обработока кликов на закрытие по closeBtn и элементам меню
      menu.addEventListener('click', (event) => {
       let target =  event.target;
-      console.log('target: ', target);
-      console.log('target: ', target.href);
-
+      
        if (target === closeBtn){
          handlerMenu();
         } else if (target.href !== undefined) {
@@ -92,24 +87,8 @@ window.addEventListener('DOMContentLoaded', function () {
             handlerMenu();
          } 
         });
-
       }
      });
-    
-    
-    // menuLi.forEach((elem) => {
-
-    //   elem.addEventListener('click', (event) => {
-    //     let target = event.target;
-    //     target = target.closest('menu');
-  
-    //     if (target) {
-    //       handlerMenu();
-    //     }
-
-    //   });
-
-    // });
   
   };
 
@@ -118,7 +97,6 @@ window.addEventListener('DOMContentLoaded', function () {
   //popup
   const togglePopUp = () => {
      
-
     const popUp = document.querySelector('.popup'),
           popUpContent = document.querySelector('.popup-content'),
     // кнопки запуска модальных окон
