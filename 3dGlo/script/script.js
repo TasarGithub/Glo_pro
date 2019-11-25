@@ -4,9 +4,6 @@ window.addEventListener('DOMContentLoaded', function () {
   // таймер
   const countTimer = (deadLine) => {
 
-
-
-
     //debugger;
     const timerdays= document.querySelector('#timer-days'),
         timerhours= document.querySelector('#timer-hours'),
@@ -26,13 +23,8 @@ window.addEventListener('DOMContentLoaded', function () {
     };
     
     const declOfNum = (n, titles)  => {
-      return titles[(n % 10 === 1 && n % 100 !== 11) ? 0 : n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 10 || n % 100 >= 20) ? 1 : 2]
-    };
-    console.log(declOfNum(1,['день', 'дня', 'дней']));
-    console.log(declOfNum(2,['день', 'дня', 'дней']));
-    console.log(declOfNum(3,['день', 'дня', 'дней']));
-    console.log(declOfNum(4,['день', 'дня', 'дней']));
-    console.log(declOfNum(5,['день', 'дня', 'дней']));
+      return titles[(n % 10 === 1 && n % 100 !== 11) ?
+         0 : n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 10 || n % 100 >= 20) ? 1 : 2]};
 
     const updateClock = () => {
       const timer = getTimeRemanining();
@@ -68,22 +60,56 @@ window.addEventListener('DOMContentLoaded', function () {
   const toggleMenu = () =>{
     const btnMenu =  document.querySelector('.menu'),
       menu =  document.querySelector('menu'),
+      menuLi = menu.querySelectorAll('ul>li'),
+      closeBtn = document.querySelector('.close-btn'),
        //закрытие/открытие меню 
       handlerMenu = () => {
         menu.classList.toggle('active-menu');
       };
-    
-    btnMenu.addEventListener('click', handlerMenu);
       
-    menu.addEventListener('click', (event) => {
-      let target = event.target;
-      target = target.closest('menu');
+      console.log('menuLi.attributes: ', menuLi.attributes);
+      console.log('closeBtn.attributes: ', closeBtn.attributes);
+      console.log('closeBtn.className: ', closeBtn.className);
 
-      if (target) {
-        handlerMenu();
+     btnMenu.addEventListener('click', (event) => {
+      let target =  event.target;
+      console.log('target: ', target);
+       handlerMenu();
+     });
+
+     menu.addEventListener('click', (event) => {
+      let target =  event.target;
+      console.log('target: ', target);
+      console.log('target: ', target.href);
+
+       if (target === closeBtn){
+         handlerMenu();
+        } else if (target.href !== undefined) {
+          handlerMenu();
+        } else {
+          menuLi.forEach((elem) => { 
+          if (target === elem){
+            handlerMenu();
+         } 
+        });
+
       }
+     });
+    
+    
+    // menuLi.forEach((elem) => {
 
-    });
+    //   elem.addEventListener('click', (event) => {
+    //     let target = event.target;
+    //     target = target.closest('menu');
+  
+    //     if (target) {
+    //       handlerMenu();
+    //     }
+
+    //   });
+
+    // });
   
   };
 
