@@ -254,6 +254,7 @@ window.addEventListener('DOMContentLoaded', function () {
       calcBlock.addEventListener('input', (event) =>{
         let target = event.target;
         target = target.closest('input');
+        
         let number = target.value;
         target.value = number.replace(/\D/g, '');
       });
