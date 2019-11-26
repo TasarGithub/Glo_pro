@@ -221,7 +221,8 @@ window.addEventListener('DOMContentLoaded', function () {
     const commandId = document.getElementById('command'),
       setSrc = (trgt) => {
         const src = trgt.getAttribute('src');
-        trgt.setAttribute('src',trgt.getAttribute('data-img'));
+        console.log('trgt.dataset.img: ', trgt.dataset.img);
+        trgt.setAttribute('src',trgt.dataset.img);
         trgt.setAttribute('data-img', src);
       };
 
