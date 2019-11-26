@@ -271,16 +271,15 @@ window.addEventListener('DOMContentLoaded', function () {
     let currentSlide = 0,
       interval = 0;
 
-    // добавляем dots
-    //  ..сколько
-    //const countSliders = slide.length;
+    // добавляем dots и dot
+  
     // создание элемента ul
     const dotUl = document.createElement('ul');
-    //вставляем 1ый элемент в верстку
+    //вставляем ul элемент в верстку
     slider.appendChild(dotUl);
     // одвеваем оформление на новый элемент
     dotUl.classList.add('portfolio-dots');
-    //вставляем по кол-ву слайдов точки в верстку li
+    //создаем li dot и вставляем в верстку по кол-ву слайдов 
     for (let i = 0; i < slide.length; i++) {
       const dotLi = document.createElement('li');
       dotUl.appendChild(dotLi);
@@ -293,6 +292,7 @@ window.addEventListener('DOMContentLoaded', function () {
     }
 
     const dot = document.querySelectorAll('.dot');
+    
     const countSlide = (n,sld) => {
    
       if (n === sld.length) {
