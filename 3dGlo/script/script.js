@@ -219,11 +219,11 @@ window.addEventListener('DOMContentLoaded', function () {
   //img mouse toggle
   const ToggleImg = () => {
     const commandId = document.getElementById('command'),
-    setSrc = (trgt) => {
-      const src = trgt.getAttribute('src');
-      trgt.setAttribute('src',trgt.getAttribute('data-img'));
-      trgt.setAttribute('data-img', src);
-    };
+      setSrc = (trgt) => {
+        const src = trgt.getAttribute('src');
+        trgt.setAttribute('src',trgt.getAttribute('data-img'));
+        trgt.setAttribute('data-img', src);
+      };
 
     commandId.addEventListener('mouseover', (event) => {
       let target = event.target;
