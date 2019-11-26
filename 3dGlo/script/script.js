@@ -215,4 +215,49 @@ window.addEventListener('DOMContentLoaded', function () {
   };
 
   tabs();
+
+  //img mouse toggle
+  const ToggleImg = () => {
+    const commandId = document.getElementById('command'),
+    setSrc = (trgt) => {
+      const src = trgt.getAttribute('src');
+      trgt.setAttribute('src',trgt.getAttribute('data-img'));
+      trgt.setAttribute('data-img', src);
+    };
+
+    commandId.addEventListener('mouseover', (event) => {
+      let target = event.target;
+      
+      target = target.closest('img');
+     
+      if (target) { 
+        setSrc(target);
+      }
+    });
+
+    commandId.addEventListener('mouseout', (event) => {
+      let target = event.target;
+
+      target = target.closest('img');
+
+      if (target) { 
+        setSrc(target);
+      }
+    });
+  };
+  ToggleImg();
+
+  //calc only number input
+  const onlyNumber = () =>{
+    const calcBlock =  document.querySelector('.calc-block');
+      
+      calcBlock.addEventListener('input', (event) =>{
+        let target = event.target;
+        target = target.closest('input');
+        let number = target.value;
+        target.value = number.replace(/\D/g, '');
+      });
+    
+  };
+  onlyNumber();
 });
