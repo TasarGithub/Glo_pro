@@ -411,14 +411,6 @@ window.addEventListener('DOMContentLoaded', function () {
 
     calcBlock.addEventListener('change', (event) => {
       const target = event.target;
-      // if (target.matches('.calc-type') || target.matches('.calc-square') || 
-      // target.matches('.calc-day') || target.matches('.calc-count')){
-      //   console.log(1);
-      // }
-      // if (target === calcType || target === calcSquare || 
-      //   target === calcDay || target === calcCount) {
-      //     console.log(1);
-      //   }
       if (target.matches('select') || target.matches('input')) {
         countSum();
       }
