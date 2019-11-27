@@ -389,9 +389,6 @@ window.addEventListener('DOMContentLoaded', function () {
         let flyAmount = () => {
 
           const flyInterval = requestAnimationFrame(flyAmount);
-          // console.log('tempValue: ', tempValue);
-          //Math.abs(tempValue - total)
-          //console.log('Math.abs(tempValue - total): ', Math.abs(tempValue - total));
           if ( tempValue < total) {
               tempValue += 200;
               totalValue.textContent = tempValue;

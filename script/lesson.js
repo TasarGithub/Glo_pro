@@ -1,4 +1,10 @@
 'use strict';
 //lesson17
 
-//dsd
+//
+document.addEventListener('DOMContentLoaded', () => {
+
+
+
+
+});
