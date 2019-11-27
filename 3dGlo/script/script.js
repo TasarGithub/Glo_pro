@@ -372,6 +372,8 @@ window.addEventListener('DOMContentLoaded', function () {
       //расчет по кол-ву помещений
       if (calcCount.value > 1){
         countValue += (calcCount.value - 1) / 10;
+        console.log('countValue: ', countValue);
+
       }
       // срок исполнения
       if (calcDay.value < 5){
@@ -381,47 +383,34 @@ window.addEventListener('DOMContentLoaded', function () {
       }
 
       if (typeValue && squareValue) {
-        total = price * typeValue * squareValue * dayValue;
+        total = Math.floor(price * typeValue * squareValue * dayValue * countValue);
         let tempValue = +totalValue.textContent;
        
         let flyAmount = () => {
-          //debugger;
+
           const flyInterval = requestAnimationFrame(flyAmount);
           // console.log('tempValue: ', tempValue);
-    
+          //Math.abs(tempValue - total)
+          //console.log('Math.abs(tempValue - total): ', Math.abs(tempValue - total));
           if ( tempValue < total) {
               tempValue += 200;
               totalValue.textContent = tempValue;
+              if (Math.abs(tempValue - total) < 200) {
+                cancelAnimationFrame(flyInterval);
+                totalValue.textContent = total;
+              }
           } else if ( tempValue > total){
               tempValue -= 200;
               totalValue.textContent = tempValue;
-          } else {
-            cancelAnimationFrame(flyInterval);
-          }
+              if (Math.abs(tempValue - total) < 200) {
+                cancelAnimationFrame(flyInterval);
+                totalValue.textContent = total;
+              }
+          } 
         }; 
         flyAmount();
       } 
-      
-      
-    
       console.log('total: ', total);
-      // let setInt = 0;
-      // //debugger;
-      // if ( +totalValue.textContent < total) {
-      //   // for (let i = +totalValue.textContent; i <= total; i++ ) {
-      //     setInt = setInterval (() => {
-      //       totalValue.textContent++;
-      //     } , (total - totalValue.textContent)/1000);
-      //     setTimeout(() => {
-      //       clearInterval(setInt);
-      //     }, total - totalValue.textContent);
-          
-
-         
-      // } else if (+totalValue.textContent > total){
-
-      // }
-
       
     };
     
