@@ -382,9 +382,47 @@ window.addEventListener('DOMContentLoaded', function () {
 
       if (typeValue && squareValue) {
         total = price * typeValue * squareValue * dayValue;
+        let tempValue = +totalValue.textContent;
+       
+        let flyAmount = () => {
+          //debugger;
+          const flyInterval = requestAnimationFrame(flyAmount);
+          // console.log('tempValue: ', tempValue);
+    
+          if ( tempValue < total) {
+              tempValue += 200;
+              totalValue.textContent = tempValue;
+          } else if ( tempValue > total){
+              tempValue -= 200;
+              totalValue.textContent = tempValue;
+          } else {
+            cancelAnimationFrame(flyInterval);
+          }
+        }; 
+        flyAmount();
       } 
       
-      totalValue.textContent = total;
+      
+      //totalValue.textContent = total;
+      console.log('total: ', total);
+      // let setInt = 0;
+      // //debugger;
+      // if ( +totalValue.textContent < total) {
+      //   // for (let i = +totalValue.textContent; i <= total; i++ ) {
+      //     setInt = setInterval (() => {
+      //       totalValue.textContent++;
+      //     } , (total - totalValue.textContent)/1000);
+      //     setTimeout(() => {
+      //       clearInterval(setInt);
+      //     }, total - totalValue.textContent);
+          
+
+         
+      // } else if (+totalValue.textContent > total){
+
+      // }
+
+      
     };
     
     calcBlock.addEventListener('change', (event) => {
