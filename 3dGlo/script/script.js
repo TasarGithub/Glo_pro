@@ -138,7 +138,7 @@ window.addEventListener('DOMContentLoaded', function () {
     let flyAnimate = () => {
       //debugger;
       flyInterval = requestAnimationFrame(flyAnimate);
-      count=count + 0.01;
+      count +=0.01;
 
       if (popUpContent.style.opacity <= 1) {
               popUpContent.style.opacity = count; 
@@ -243,7 +243,7 @@ window.addEventListener('DOMContentLoaded', function () {
   const slider = () => {
 
     const slide = document.querySelectorAll('.portfolio-item'),
-      btn = document.querySelectorAll('.portfolio-btn'),
+      
       
       slider = document.querySelector('.portfolio-content');
     let currentSlide = 0,
