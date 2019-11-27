@@ -403,7 +403,7 @@ window.addEventListener('DOMContentLoaded', function () {
       } 
       
       
-      //totalValue.textContent = total;
+    
       console.log('total: ', total);
       // let setInt = 0;
       // //debugger;
