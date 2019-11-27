@@ -140,35 +140,11 @@ window.addEventListener('DOMContentLoaded', function () {
       flyInterval = requestAnimationFrame(flyAnimate);
       count=count + 0.01;
 
-      //document.documentElement.clientWidth
-      //console.dir('document.documentElement: ', document.documentElement);
-      //console.dir('popUpContent: ', popUpContent);
-      //debugger;
-      //let opp = popUpContent.style.opacity;
-          if (popUpContent.style.opacity <= 1) {
+      if (popUpContent.style.opacity <= 1) {
               popUpContent.style.opacity = count; 
           } else {
             cancelAnimationFrame(flyInterval);
           }
-
-/*
-      if(screen.width > 768){
-        if(count < (document.documentElement.clientWidth - popUpContent.offsetWidth)&&
-          (count < (document.documentElement.clientHeight - popUpContent.offsetHeight))){
-            
-            popUpContent.style.left = count + 'px';
-            popUpContent.style.top = count + 'px';
-        } else if (count < (document.documentElement.clientHeight - popUpContent.offsetHeight)){
-          
-          popUpContent.style.top = count + 'px';
-        } else if (count < (document.documentElement.clientWidth - popUpContent.offsetWidth)) {
-          popUpContent.style.left = count + 'px';
-        } else {
-          cancelAnimationFrame(flyInterval);
-        }
-      } else {
-        cancelAnimationFrame(flyInterval);
-      }*/
     }; 
     
   };
