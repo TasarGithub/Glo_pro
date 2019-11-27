@@ -71,7 +71,7 @@ window.addEventListener('DOMContentLoaded', function () {
       // обработка клика на открытие меню
      btnMenu.addEventListener('click', (event) => {
       let target =  event.target;
-      console.log('target: ', target);
+      //console.log('target: ', target);
        handlerMenu();
      });
      //обработока кликов на закрытие по closeBtn и элементам меню
@@ -141,8 +141,8 @@ window.addEventListener('DOMContentLoaded', function () {
       count=count + 0.01;
 
       //document.documentElement.clientWidth
-      console.dir('document.documentElement: ', document.documentElement);
-      console.dir('popUpContent: ', popUpContent);
+      //console.dir('document.documentElement: ', document.documentElement);
+      //console.dir('popUpContent: ', popUpContent);
       //debugger;
       //let opp = popUpContent.style.opacity;
           if (popUpContent.style.opacity <= 1) {
@@ -254,9 +254,11 @@ window.addEventListener('DOMContentLoaded', function () {
       calcBlock.addEventListener('input', (event) =>{
         let target = event.target;
         target = target.closest('input');
-        
-        let number = target.value;
-        target.value = number.replace(/\D/g, '');
+
+        if (target) {
+          let number = target.value;
+          target.value = number.replace(/\D/g, '');
+        }
       });
     
   };
@@ -376,21 +378,21 @@ window.addEventListener('DOMContentLoaded', function () {
 
   const calc = (price = 100) => {
 
-    const calcBlock = document.querySelector('calc-block'),
-      calcType = document.querySelector('calc-type'),
-      calcSquare = document.querySelector('calc-square'),
-      calcDay = document.querySelector('calc-day'),
-      calcCount = document.querySelector('calc-count'),
-      totalValue = document.getElementById('total-value');
+    const calcBlock = document.querySelector('.calc-block'),
+      calcType = document.querySelector('.calc-type'),
+      calcSquare = document.querySelector('.calc-square'),
+      calcDay = document.querySelector('.calc-day'),
+      calcCount = document.querySelector('.calc-count'),
+      totalValue = document.getElementById('total');
     
     const countSum = () => {
+   
       let total = 0,
         countValue = 1,
         dayValue = 1;
       const  typeValue = calcType.options[calcType.selectedIndex].value,
         squareValue = +calcSquare.value;
-      //console.log(!!typeValue);
-      //console.log(!!squareValue);
+
       //расчет по кол-ву помещений
       if (calcCount.value > 1){
         countValue += (calcCount.value - 1) / 10;
@@ -408,8 +410,9 @@ window.addEventListener('DOMContentLoaded', function () {
       
       totalValue.textContent = total;
     };
-
+    
     calcBlock.addEventListener('change', (event) => {
+      
       const target = event.target;
       if (target.matches('select') || target.matches('input')) {
         countSum();
