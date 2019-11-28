@@ -27,6 +27,8 @@ document.addEventListener('DOMContentLoaded', () => {
           }
         });
         
+      } else {
+        output.innerHTML = 'Произошла ошибка';
       }
     });
   });
