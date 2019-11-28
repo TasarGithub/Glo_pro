@@ -18,6 +18,14 @@ document.addEventListener('DOMContentLoaded', () => {
       if (request.readyState === 4 && request.status === 200) {
 
         const data = JSON.parse(request.responseText);
+        data.cars.forEach(item => {
+          if(item.brand === select.value){
+            // c помощью деструктуризации присвоить 
+            const {brand, model, price} = item;
+            output.innerHTML = `Тачка ${brand} ${model} <br>
+            Цена: ${price}$`;
+          }
+        });
         
       }
     });
